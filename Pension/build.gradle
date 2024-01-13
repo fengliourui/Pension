@@ -1,0 +1,36 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+id 'com.android.application' version '8.1.3' apply false
+    id 'com.android.library' version '8.1.3' apply false
+}
+
+ext{
+
+    isDebug = false //当它为true时，是调试模式，组件可以单独运行(applicaton)；当它为false，是正式的编译打包的模式(library). 作业：使得业务组件可以在application和library之间进行切换
+
+    android = [//这些变量若在创建module时注意版本控制，可以选择不进行特意设置
+               compileSdkVersion: 33,
+               minSdkVersion: 27,
+               targetSdkVersion: 33,
+               buildToolsVersion: "30.0.2",
+               versionCode: 1,
+               versionName: "1.0"
+    ]
+
+    applicationId = [ // 可以切换到application
+                      "app" : "com.example.component",
+                      "main" : "com.example.module.main",
+                      "login" : "com.example.module.login"
+    ]
+// SDK的一写library
+    library = [
+            "appcompat" : "androidx.appcompat:appcompat:1.3.0",
+            "material" : "com.google.android.material:material:1.4.0",
+            "constraintlayout" : "androidx.constraintlayout:constraintlayout:2.0.4"
+    ]
+//第三方的library
+    libARouter = "com.alibaba:arouter-api:1.5.1"
+    libARouterCompiler = "com.alibaba:arouter-compiler:1.5.1"
+    libGson = "com.google.code.gson:gson:2.8.6"
+
+}
