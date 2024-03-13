@@ -11,9 +11,10 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#FFC107"
         app:layout_constraintTop_toTopOf="parent"
         app:title="注册"
+
+        android:background="#FFC107"
         app:titleMarginStart="130dp"
         app:titleTextColor="@color/white"
         tools:layout_editor_absoluteX="1dp"/>

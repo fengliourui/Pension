@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -18,16 +20,22 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.module_login.Util.CheckPhone;
 import com.example.module_login.Util.CountDownTimerUtils;
 import com.example.module_login.Util.Internet;
 import com.example.module_login.databinding.ActivityMainBinding;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         binding.loginVerifycode.sendCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //发送验证码
                 phoneNumber = binding.loginVerifycode.phoneNumber.getText().toString();
                 if(phoneNumber.length() != 11){
                     Toast.makeText(MainActivity.this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
@@ -106,11 +115,10 @@ public class MainActivity extends AppCompatActivity {
         ClickableSpan clickableSpan02 = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View view) {
-                //-------------------
                 Intent intent_password = new Intent(MainActivity.this, relation_password.class);
                 intent_password.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent_password);
-                Toast.makeText(MainActivity.this,"你点击了手机号密码登录",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this,"你点击了手机号密码登录",Toast.LENGTH_SHORT).show();
             }
         };
         spannableString02.setSpan(clickableSpan02,0,7,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -168,6 +176,98 @@ public class MainActivity extends AppCompatActivity {
         },16,18,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         binding.loginMode.setText(spannableString03);
         binding.loginMode.setMovementMethod(LinkMovementMethod.getInstance());
+
+        //手机号检验
+        binding.loginVerifycode.phoneNumber.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b ==false){
+                    CheckPhone.checkPhone(binding.loginVerifycode.phoneNumber,getApplicationContext());
+                }else{
+                    binding.loginVerifycode.phoneNumber.setError(null, null);//焦点聚焦时去除错误图标
+                }
+            }
+        });
+        //验证码不能为空
+        binding.loginVerifycode.verifyWord.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b ==false ){
+                    if(binding.loginVerifycode.verifyWord.getText().length() == 0){
+                        Drawable drawable = getResources().getDrawable(R.drawable.warning);//错误时要显示的图片
+                        drawable.setBounds(new Rect(0,0,drawable.getIntrinsicWidth(),drawable.getIntrinsicHeight()));
+                        binding.loginVerifycode.verifyWord.setError("请输入密码",drawable);
+                    }
+                }else{
+                    binding.loginVerifycode.verifyWord.setError(null, null);//焦点聚焦时去除错误图标
+                }
+            }
+        });
+        //登录
+        binding.loginVerifycode.login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String phoneNumber = binding.loginVerifycode.phoneNumber.getText().toString();
+                String verifyWord = binding.loginVerifycode.verifyWord.getText().toString();
+                if(binding.loginVerifycode.phoneNumber.getError() != null || binding.loginVerifycode.verifyWord.getError() != null ||
+                        phoneNumber.length() == 0 || verifyWord.length() == 0){
+                    Toast.makeText(getApplicationContext(),"请输入完整信息！",Toast.LENGTH_SHORT).show();
+                }else{
+                    Log.i(TAG, "手机号验证码进行登录");
+                    String json = String.format("{\n" +
+                            "  \"account\": \"\",\n" +
+                            "  \"mode\": \"phone\",\n" +
+                            "  \"password\": \"\",\n" +
+                            "  \"phone\": \"%s\",\n" +
+                            "  \"verifyCode\":\"%s\"\n" +
+                            "}", phoneNumber, verifyWord);
+                    Log.i(TAG, "请求的json为" + json);
+                    Request request = new Request.Builder()
+                            .url("https://beadhouse.81jcpd.cn/user/phone/login")
+                            .post(RequestBody.create(MediaType.parse("application/json"),json))
+                            .build();
+                    Call call = client.newCall(request);
+                    call.enqueue(new Callback() {
+                        @Override
+                        public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                            Log.i(TAG, "onFailure: 网络请求失败");
+                        }
+
+                        @Override
+                        public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                            Log.i(TAG, "onResponse: 网络请求成功");
+                            String res = response.body().string();
+                            try {
+                                JSONObject jsonObject = new JSONObject(res);
+                                String message = jsonObject.getString("message");
+                                String code = jsonObject.getString("code");
+                                Log.i(TAG, "message = "+ message);
+                                Log.i(TAG, "code = "+ code);
+                                if(code.equals("fail")){
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }else{
+                                    JSONObject dataObject = jsonObject.getJSONObject("data");
+                                    String token = dataObject.getString("token");
+                                    String identify = dataObject.getString("identify");
+                                    Log.i(TAG, "identify = "+ identify);
+                                    Log.i(TAG, "token = "+ token);
+                                }
+
+
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
+
+                        }
+                    });
+                }
+            }
+        });
     }
 
 }

@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -55,8 +56,10 @@ public class register extends AppCompatActivity {
         //设置toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("ssssss");
-        toolbar.setNavigationIcon(R.drawable.navigationbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.navigationbar);
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,7 +122,7 @@ public class register extends AppCompatActivity {
                 if (b ==false){
                     CheckPhone.checkPhone(binding.phoneNumber,getApplicationContext());
                 }else{
-                    binding.name.setError(null, null);//焦点聚焦时去除错误图标
+                    binding.phoneNumber.setError(null, null);//焦点聚焦时去除错误图标
                 }
             }
         });
@@ -209,7 +212,7 @@ public class register extends AppCompatActivity {
                 }
             }
         });
-        //按钮登录
+        //按钮注册
         binding.register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -220,13 +223,13 @@ public class register extends AppCompatActivity {
                 password01 = binding.password01.getText().toString();
                 password02 = binding.password02.getText().toString();
 
-                if(!binding.verifyWord.getText().toString().equals("123456")){
+               /* if(!binding.verifyWord.getText().toString().equals("123456")){
                     Drawable drawable = getResources().getDrawable(R.drawable.warning);//错误时要显示的图片
                     drawable.setBounds(new Rect(0,0,drawable.getIntrinsicWidth(),drawable.getIntrinsicHeight()));
                     binding.verifyWord.setError("输入的验证码不正确",drawable);
                     binding.verifyWord.setText("");
 
-                }
+                }*/
                 if(binding.name.getError() != null || binding.idNumber.getError() != null || binding.phoneNumber.getError() != null || binding.verifyWord.getError() != null
                         || binding.password01.getError() != null || binding.password02.getError() != null || name.length() == 0 || idNumber.length() == 0 || phoneNumber.length() == 0
                         || password01.length() == 0 || password02.length() == 0){
@@ -279,9 +282,9 @@ public class register extends AppCompatActivity {
                                         public void run() {
                                             Log.i(TAG, "onResponse: code == 200 注册成功请登录！");
                                             Toast.makeText(getApplicationContext(),"注册成功，请登录！",Toast.LENGTH_SHORT).show();
+                                            finish();
                                         }
                                     });
-                                    //finish();
                                  }
                             } catch (JSONException e) {
                                 throw new RuntimeException(e);
