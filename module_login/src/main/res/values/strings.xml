@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">module_login</string>
+    <string name="title_activity_login_verifycode">login_verifycode</string>
+</resources>
