@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application android:theme="@style/Theme.Pension">
+        <activity
+            android:name="UI.Show.four.Chat1"
+            android:exported="false" />
+        <activity
+            android:name="UI.Show.Three.Activity2"
+            android:exported="false" />
+        <activity
+            android:name="UI.Show.Three.Activity1"
+            android:exported="false" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.Business.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity
+            android:name="UI.Show.Two.Ativitydetail"
+            android:exported="false" />
+        <activity
+            android:name="UI.Show.Three.Photodetail"
+            android:exported="false" />
+        <activity
+            android:name="UI.Show.Three.OlderDetail"
+            android:exported="false" />
+        <activity
+            android:name="UI.Show.first.All"
+            android:exported="false" />
+        <activity
+            android:name="UI.Show.first.Fragmentvide"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity1"
+            android:exported="true" />
+    </application>
+
+</manifest>
