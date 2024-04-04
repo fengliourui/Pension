@@ -31,7 +31,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class register extends AppCompatActivity {
+public class  register extends AppCompatActivity {
 
     private static final String TAG = "register";
     //viewbinding

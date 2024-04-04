@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
                 }else{
                     getURL = Internet.addURLParam("https://beadhouse.81jcpd.cn/user/code/send","phone",phoneNumber);
-                    getURL = Internet.addURLParam(getURL,"mode","0");
+                    getURL = Internet.addURLParam(getURL,"mode","1");
                     Log.i(TAG, "请求的url是：" + getURL);
                     Request request = new Request.Builder().get()
                             .url(getURL)
