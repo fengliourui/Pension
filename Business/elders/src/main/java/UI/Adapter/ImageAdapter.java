@@ -90,7 +90,6 @@ public class ImageAdapter  extends RecyclerView.Adapter<ImageAdapter.VideoViewHo
 
     @Override
     public int getItemCount() {
-//        return 1;
         return imageview.getImage().getData().size();
     }
 

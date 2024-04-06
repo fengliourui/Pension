@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.Business.elders.R;
 
 public class OlderDetail extends AppCompatActivity {
@@ -34,6 +35,7 @@ public class OlderDetail extends AppCompatActivity {
         imagePath = getIntent().getStringExtra("imagePath");
         Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
         materialCardView.setImageBitmap(bitmap); // 加载本地图片
+        Glide.with(this).load(imagePath).into(materialCardView);
 
         initClick();
     }

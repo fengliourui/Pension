@@ -25,13 +25,39 @@
         android:layout_weight="10"
         android:background="@color/grue"
         android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/left_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp"
+            >
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:cardCornerRadius="35dp"
+                app:cardBackgroundColor="#5AD0D0"
+                >
+                <TextView
+                    android:id="@+id/left_msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="他是现在的智能聊天系统，可以为你提供一定帮助"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp" />
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
         <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/thtttt"
+                android:id="@+id/chatrecycleview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingBottom="50dp" />
@@ -56,7 +82,7 @@
             android:layout_marginEnd="10dp"
             android:layout_gravity="center">
             <EditText
-                android:id="@+id/searchPlaceEdit"
+                android:id="@+id/chatEdit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="14sp"
@@ -74,9 +100,11 @@
             app:cardBackgroundColor="@color/blue"
             android:layout_gravity="center">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/chattext"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:text="发送"/>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>

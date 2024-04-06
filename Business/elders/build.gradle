@@ -8,7 +8,7 @@ if(isDebug)//这里是进行判断此时的状态
 
 android {
     namespace 'com.example.Business.elders'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         if(isDebug)//这里是进行判断此时的状态
@@ -61,11 +61,23 @@ dependencies {
     implementation 'androidx.preference:preference:1.2.0'
     implementation project(path: ':Base:main')
     implementation 'com.google.android.libraries.mapsplatform.transportation:transportation-consumer:2.1.0'
-    implementation project(path: ':module_login')
+//    implementation project(path: ':module_login')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
+    constraints {
+        add("implementation", "org.jetbrains.kotlin:kotlin-stdlib-jdk7") {
+            version {
+                require("1.8.0")
+            }
+        }
+        add("implementation", "org.jetbrains.kotlin:kotlin-stdlib-jdk8") {
+            version {
+                require("1.8.0")
+            }
+        }
+    }
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.16.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
@@ -75,7 +87,5 @@ dependencies {
     annotationProcessor 'com.alibaba:arouter-compiler:1.5.2'
 //androidx项目
     implementation 'com.github.xuexiangjys:XUI:1.2.1'
-    //WebSocket
-    implementation 'org.java-websocket:Java-WebSocket:1.5.2'
 
 }

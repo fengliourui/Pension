@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -110,6 +111,7 @@ public class Fragment3 extends Fragment {
 
     //获取实例
     private void initView() {
+        imagePath = MainActivity1.url;
         linearLayout1 = view.findViewById(R.id.car1);
         linearLayout2 = view.findViewById(R.id.car3);
         linearLayout3 = view.findViewById(R.id.car4);
@@ -123,7 +125,7 @@ public class Fragment3 extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), OlderDetail.class);
-                intent.putExtra("imagePath",imagePath);
+                intent.putExtra("imagePath",MainActivity1.url);
                 startActivityForResult(intent, REQUEST_CODE_OLDER_DETAIL_1 );
             }
         });
@@ -131,7 +133,7 @@ public class Fragment3 extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(),Photodetail.class);
-                intent.putExtra("imagePath",imagePath);
+                intent.putExtra("imagePath", MainActivity1.url);
                 startActivityForResult(intent,REQUEST_CODE ); // 使用startActivityForResult()方法启动活动
             }
         });

@@ -20,6 +20,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -72,16 +73,16 @@ public class Photodetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photodetail);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        //获取服务端数据
-        getCloudData();
+        String imagePath = getIntent().getStringExtra("imagePath");
         //处理底边抽屉
         dealbottomSheet();
         //获取实例
         initView();
-        String imagePath = getIntent().getStringExtra("imagePath");
         Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-        imageView2.setImageBitmap(bitmap); // 加载本地图片
+        Glide.with(this).load(imagePath).into(imageView2);
+        //获取服务端数据
+        getCloudData();
+
         //点击事件
         initClick();
     }

@@ -414,9 +414,13 @@ public class Fragmentvide extends AppCompatActivity {
     }
 
     public static void changeImageColor(ImageView imageView, int color) {
+
         // 获取ImageView的Drawable
         Drawable drawable = imageView.getDrawable();
-
+        if( drawable==null)
+        {
+            return;
+        }
         // 设置颜色滤镜效果
         drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
 

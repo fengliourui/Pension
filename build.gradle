@@ -6,7 +6,7 @@ id 'com.android.application' version '8.1.3' apply false
 
 ext{
 
-    isDebug = false //当它为true时，是调试模式，组件可以单独运行(applicaton)；当它为false，是正式的编译打包的模式(library). 作业：使得业务组件可以在application和library之间进行切换
+    isDebug = true //当它为true时，是调试模式，组件可以单独运行(applicaton)；当它为false，是正式的编译打包的模式(library). 作业：使得业务组件可以在application和library之间进行切换
 
     android = [//这些变量若在创建module时注意版本控制，可以选择不进行特意设置
                compileSdkVersion: 34,
