@@ -23,8 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView navigationView;
     private ViewPager viewPager;
-
-    public static String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyRHRvIjp7InVzZXJJZCI6IjY4YmQ1Y2ZiLTkwNjEtNDI2My1hOTQ0LWMwYTY3NWIxYmMwZiIsImlkZW50aWZ5IjoiMCIsInVzZXJOYW1lIjoiIn0sImV4cCI6MzI4OTAwMTc2N30.oNo1fu3rp-acrVsP0MAZn_C7s3JgeBR48mPz1kiaI2A";
+    public static String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyRHRvIjp7InVzZXJJZCI6ImNiZDVjNjRlLTRlNGYtNDkxZC1iYjk0LTQxMjI2Y2Y4NjhhYyIsImlkZW50aWZ5IjoiMCIsInVzZXJOYW1lIjoiIn0sImV4cCI6MzI4OTI4NDk1Mn0.U0tSSZmNHFZUFXQIMwFzQ0-CiwZQcQ1ZbG_IQbIuBjY";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

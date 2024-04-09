@@ -1,6 +1,7 @@
 package com.example.module_manage.pinyin;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.module_manage.R;
+import com.example.module_manage.showinfomation.ShowOld;
 
 import java.util.List;
 
@@ -64,18 +66,21 @@ public class SortAdapter extends RecyclerView.Adapter<SortAdapter.ViewHolder> {
         }
 
         //---------------------------这里进行点击名字的跳转，仅仅是实现了一个吐司
-        if (listener != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onItemClick(holder.itemView, position);
-                }
-            });
+        //这个点击事件对于整个item都有效
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, ShowOld.class);
+                intent.putExtra("userId",mData.get(position).getId());
+                intent.putExtra("userName",mData.get(position).getName());
+                mContext.startActivity(intent);
+            }
+        });
 
-        }
 
         holder.tvName.setText(this.mData.get(position).getName());
 
+        //这个点击事件仅对tvName生效
         /*holder.tvName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,7 +99,7 @@ public class SortAdapter extends RecyclerView.Adapter<SortAdapter.ViewHolder> {
     }
 
     //**********************itemClick************************
-    public interface OnItemClickListener {
+    /*public interface OnItemClickListener {
         void onItemClick(View view, int position);
     }
 
@@ -102,7 +107,7 @@ public class SortAdapter extends RecyclerView.Adapter<SortAdapter.ViewHolder> {
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
-    }
+    }*/
     //**************************************************************
 
 

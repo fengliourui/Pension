@@ -1,6 +1,10 @@
 package com.example.module_manage.util;
 import android.media.Image;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.MediaStore;
+
+import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -9,7 +13,8 @@ import java.util.List;
 /**
  * 这个类是firstpage里的listview将活动展示出来时
  * 网络请求后需要将得到的结果解析出来
- * 没什么好甚久的就是set get方法 tostring方法
+ * 没什么好深究的就是set get方法 tostring方法
+ * @SerializedName注解主要用于Gson库中，用于在Java对象和JSON数据进行转换时，对字段名称进行重命名
  */
 
 public class ActivityEvent {
@@ -47,6 +52,7 @@ public class ActivityEvent {
 
     @SerializedName("status")
     private String status;
+
 
     //Image类来映射images中的对象
     public static class Image{

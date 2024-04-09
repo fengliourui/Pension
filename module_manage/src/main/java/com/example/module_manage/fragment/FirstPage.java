@@ -52,7 +52,6 @@ public class FirstPage extends Fragment {
 
     //recyclerview
     RecyclerView recyclerView;
-    SwipeRefreshLayout refreshLayout;
 
     private final OkHttpClient client = new OkHttpClient();
     String token = MainActivity.token;
@@ -113,11 +112,16 @@ public class FirstPage extends Fragment {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 Log.i(TAG, "onResponse: 网络请求成功");
+
+                //这里我们使用Gson来解析响应结果
                 String res = response.body().string();
                 Gson gson = new Gson();
-                //创建typetoken来指定list类型，这里的泛型里是序列化的类
+
+                //这里使用了Google Gson库中的TypeToken类来创建一个表示List<ActivityEvent>类型的Type对象
+                //Gson需要知道具体的泛型类型来正确的解析JSON数据，但是java的泛型是通过类型擦除来实现的
                 Type eventType = new TypeToken<List<ActivityEvent>>(){}.getType();
                 //解析json字符串
+                //JsonElement是Gson库中表示JSON元素的基类，可以是JSON对象、数组、字符串、数字等
                 JsonElement jsonElement = gson.fromJson(res,JsonElement.class);
                 JsonArray jsonArray = jsonElement.getAsJsonObject().getAsJsonArray("data");
                 //将jsonArray转换为List
@@ -140,22 +144,26 @@ public class FirstPage extends Fragment {
         });
 
     }
-    //refresh
+
+    //内部类 加了private则不能被外部的其他任何类访问
+    //因为点击activity之后的布局里面还有一个banner，使用的泛型不一样
+    //这里直接将图片写死了，所以泛型里传的是图片的id
+    //但在展示activity相应的banner里面的图片是网络资源url
+    private class BannerViewHolder implements MZViewHolder<Integer>{
+
+        private ImageView mImageView;
+        @Override
+        public View createView(Context context) {
+            View view = LayoutInflater.from(context).inflate(R.layout.banner_item,null);
+            mImageView = (ImageView) view.findViewById(R.id.banner_image);
+            return view;
+        }
+
+        @Override
+        public void onBind(Context context, int position, Integer data) {
+            mImageView.setImageResource(data);
+        }
+    }
 
 }
 
-class BannerViewHolder implements MZViewHolder<Integer>{
-
-    private ImageView mImageView;
-    @Override
-    public View createView(Context context) {
-        View view = LayoutInflater.from(context).inflate(R.layout.banner_item,null);
-        mImageView = (ImageView) view.findViewById(R.id.banner_image);
-        return view;
-    }
-
-    @Override
-    public void onBind(Context context, int position, Integer data) {
-        mImageView.setImageResource(data);
-    }
-}

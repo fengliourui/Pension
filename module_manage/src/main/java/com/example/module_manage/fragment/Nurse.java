@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.module_manage.MainActivity;
 import com.example.module_manage.R;
 import com.example.module_manage.pinyin.ClearEditText;
 import com.example.module_manage.pinyin.PinyinComparator;
@@ -45,6 +46,11 @@ import okhttp3.Response;
 
 public class Nurse extends Fragment {
     private static final String TAG = "Nurse";
+    //为了防止数据被重复加载，需要这个变量，每次加载前判断一下是否加载，从而不让数据重复添加
+    //当添加了护士之后，可以把这个数据改变，使其再次进行请求。
+    //public static int load_nurse = 0;
+    //事实证明这种方法行不通，当我点击玩其他fragment再点回来的时候数据就没了
+    //试一下每次调用onviewcreated 的时候 clear
     private RecyclerView mRecyclerView;
     private SideBar sideBar;
     private TextView dialog;
@@ -56,7 +62,7 @@ public class Nurse extends Fragment {
     private PinyinComparator pinyinComparator;
     private final OkHttpClient client = new OkHttpClient();
     //                                    token 这里写死了 后面要改一下！！！
-    String token =  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyRHRvIjp7InVzZXJJZCI6IjI4ZDc5MWJmLTViYTQtNDA1NC1hYjFhLWExNGZhNjc1MjM5MCIsImlkZW50aWZ5IjoiMCIsInVzZXJOYW1lIjoiIn0sImV4cCI6MzI4ODc2MTIxNH0.jiH9SYM8AyUn_Mu4vtkRIWuJhe-vzxJX5CfUFqUMIX8";
+    String token = MainActivity.token;
     String getURL;
     List<Map<String,String>> nursesList = new ArrayList<>();
     @Override
@@ -72,49 +78,54 @@ public class Nurse extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        nursesList.clear();
         //应该先请求，然后再通过initViews设置数据，设置的时候要把数据通过参数传进去
         getURL = Internet.addURLParam("https://beadhouse.81jcpd.cn/master/getall/nurse-older", "auth", token);
         Request request = new Request.Builder()
                 .url(getURL)
                 .build();
         Log.i(TAG, "请求的URL是" + getURL);
-        Call call = client.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.i(TAG, "onFailure: 网络请求失败");
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                Log.i(TAG, "onResponse: 网络请求成功！");
-                String res = response.body().string();
-                Log.i(TAG, res);
-
-                try {
-                    JSONObject jsonObject = new JSONObject(res);
-                    JSONObject dataObject = jsonObject.getJSONObject("data");
-                    JSONArray nursesArray = dataObject.getJSONArray("nurses");
-                    Log.i(TAG, "onResponse: 执行1");
-                    //将其转化为List
-                    for (int i = 0; i < nursesArray.length(); i++) {
-                        JSONObject nurse = nursesArray.getJSONObject(i);
-                        Map<String, String> nurseMap = new HashMap<>();
-                        nurseMap.put("userId", nurse.getString("userId"));
-                        nurseMap.put("username", nurse.getString("username"));
-                        nursesList.add(nurseMap);
-                    }
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            initViews(view, nursesList);
-                        }
-                    });
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
+        //if(load_nurse == 0){
+            Call call = client.newCall(request);
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    Log.i(TAG, "onFailure: 网络请求失败");
                 }
-            }
-        });
+
+                @Override
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                    Log.i(TAG, "onResponse: 网络请求成功！");
+                    String res = response.body().string();
+                    Log.i(TAG, res);
+                    //load_nurse = 1;
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(res);
+                        JSONObject dataObject = jsonObject.getJSONObject("data");
+                        JSONArray nursesArray = dataObject.getJSONArray("nurses");
+                        Log.i(TAG, "onResponse: 执行1");
+                        //将其转化为List
+                        for (int i = 0; i < nursesArray.length(); i++) {
+                            JSONObject nurse = nursesArray.getJSONObject(i);
+                            Map<String, String> nurseMap = new HashMap<>();
+                            nurseMap.put("userId", nurse.getString("userId"));
+                            nurseMap.put("username", nurse.getString("username"));
+                            nursesList.add(nurseMap);
+                        }
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                initViews(view, nursesList);
+                            }
+                        });
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+        //}
+
     }
     //初始化：对比较器的初始化、对数据排序、对recyclerview的初始化、设置监听
     private void initViews(View view,List<Map<String,String>> data){

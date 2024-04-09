@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.module_manage.MainActivity;
 import com.example.module_manage.R;
 import com.example.module_manage.databinding.ActivityAddOldBinding;
+import com.example.module_manage.fragment.Old;
 
 import org.intellij.lang.annotations.Language;
 import org.json.JSONException;
@@ -122,6 +123,7 @@ public class addOld extends AppCompatActivity {
                                     }
                                 });
                                 if(code.equals("success")){
+                                    //Old.load_old = 1;
                                     finish();
                                 }
                             } catch (JSONException e) {

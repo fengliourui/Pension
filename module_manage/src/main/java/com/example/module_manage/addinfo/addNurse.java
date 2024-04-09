@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.module_manage.MainActivity;
 import com.example.module_manage.R;
 import com.example.module_manage.databinding.ActivityAddNurseBinding;
+import com.example.module_manage.fragment.Nurse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -118,6 +119,7 @@ public class addNurse extends AppCompatActivity {
                                     }
                                 });
                                 if(code.equals("success")){
+                                    //Nurse.load_nurse = 1;//能够重新申请数据，达到数据的刷新
                                     finish();
                                 }
                             } catch (JSONException e) {

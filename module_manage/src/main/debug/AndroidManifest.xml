@@ -11,6 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OldCare">
         <activity
+            android:name=".showinfomation.ShowActivity"
+            android:exported="false" />
+        <activity
+            android:name=".showinfomation.ShowOld"
+            android:exported="false" />
+        <activity
             android:name=".addinfo.addActivity"
             android:exported="false" />
         <activity

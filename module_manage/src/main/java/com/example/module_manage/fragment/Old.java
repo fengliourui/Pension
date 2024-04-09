@@ -61,6 +61,7 @@ public class Old extends Fragment {
     //                                    token 这里写死了 后面要改一下！！！
     String token = MainActivity.token;
     String getURL;
+    //public static int load_old = 0;
     List<Map<String,String>> oldersList = new ArrayList<>();
     //List<Map<String,String>> nursesList = new ArrayList<>();
 
@@ -82,50 +83,53 @@ public class Old extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        oldersList.clear();
         //应该先请求，然后再通过initViews设置数据，设置的时候要把数据通过参数传进去
         getURL = Internet.addURLParam("https://beadhouse.81jcpd.cn/master/getall/nurse-older","auth",token);
         Request request = new Request.Builder()
                         .url(getURL)
                         .build();
         Log.i(TAG, "请求的URL是" + getURL);
-        Call call = client.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                Log.i(TAG, "onFailure: 网络请求失败");
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                Log.i(TAG, "onResponse: 网络请求成功！");
-                String res = response.body().string();
-                Log.i(TAG, res);
-
-                try {
-                    JSONObject jsonObject = new JSONObject(res);
-                    JSONObject dataObject = jsonObject.getJSONObject("data");
-                    JSONArray oldersArray = dataObject.getJSONArray("olders");
-                    Log.i(TAG, "onResponse: 执行1");
-                    //将其转化为List
-                    for (int i = 0; i < oldersArray.length(); i++) {
-                        JSONObject older = oldersArray.getJSONObject(i);
-                        Map<String,String> olderMap = new HashMap<>();
-                        Log.i(TAG, "第"+i+"个数据"+older.getString("userId")+older.getString("username")+"\n");
-                        olderMap.put("userId",older.getString("userId"));
-                        olderMap.put("username",older.getString("username"));
-                        oldersList.add(olderMap);
-                    }
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            initViews(view,oldersList);
-                        }
-                    });
-                } catch (JSONException e) {
-                    throw new RuntimeException(e);
+        //if(load_old == 0){
+            Call call = client.newCall(request);
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    Log.i(TAG, "onFailure: 网络请求失败");
                 }
-            }
-        });
+
+                @Override
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                    Log.i(TAG, "onResponse: 网络请求成功！");
+                    String res = response.body().string();
+                    Log.i(TAG, res);
+                    //load_old = 1;
+                    try {
+                        JSONObject jsonObject = new JSONObject(res);
+                        JSONObject dataObject = jsonObject.getJSONObject("data");
+                        JSONArray oldersArray = dataObject.getJSONArray("olders");
+                        Log.i(TAG, "onResponse: 执行1");
+                        //将其转化为map
+                        for (int i = 0; i < oldersArray.length(); i++) {
+                            JSONObject older = oldersArray.getJSONObject(i);
+                            Map<String,String> olderMap = new HashMap<>();
+                            Log.i(TAG, "第"+i+"个数据"+older.getString("userId")+older.getString("username")+"\n");
+                            olderMap.put("userId",older.getString("userId"));
+                            olderMap.put("username",older.getString("username"));
+                            oldersList.add(olderMap);
+                        }
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                initViews(view,oldersList);
+                            }
+                        });
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+       // }
 
     }
     //初始化：对比较器的初始化、对数据排序、对recyclerview的初始化、设置监听
@@ -165,12 +169,7 @@ public class Old extends Fragment {
         mRecyclerView.setLayoutManager(manager);
         adapter = new SortAdapter(getContext(), SourceDateList);
         //定义adapter的时候，实现之前定义的点击监听器接口
-        adapter.setOnItemClickListener(new SortAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
 
-            }
-        });
         mRecyclerView.setAdapter(adapter);
         mClearEditText = (ClearEditText) view.findViewById(R.id.filter_edit);
         //根据输入框输入值的改变来过滤搜索
@@ -201,6 +200,8 @@ public class Old extends Fragment {
             SortModel sortModel = new SortModel();
             String name = map.get("username");
             sortModel.setName(name);
+            String id = map.get("userId");
+            sortModel.setId(id);
             //汉字转换成拼音
             String pinyin = PinyinUtils.getPingYin(name);
             String sortString = pinyin.substring(0, 1).toUpperCase();

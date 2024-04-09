@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/info_background"
+    tools:context=".showinfomation.ShowOld">
+
+    <RelativeLayout
+        android:id="@+id/relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#D8D2D2"
+            android:gravity="center"
+            android:text="TextView"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/blood_sugar"
+            android:layout_width="91dp"
+            android:layout_height="91dp"
+            android:background="@drawable/blood_sugar"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:gravity="center"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/blood_pressure"
+            android:layout_width="91dp"
+            android:layout_height="91dp"
+            android:layout_toRightOf="@id/blood_sugar"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/blood_pressure"
+            android:gravity="center"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/blood_fat"
+            android:layout_width="91dp"
+            android:layout_height="91dp"
+            android:background="@drawable/blood_fat"
+            android:layout_below="@id/blood_sugar"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:gravity="center"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/height"
+            android:layout_width="91dp"
+            android:layout_height="91dp"
+            android:background="@drawable/height"
+            android:layout_below="@id/blood_pressure"
+            android:layout_toRightOf="@id/blood_fat"
+            android:layout_marginTop="70dp"
+            android:gravity="center"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/weight"
+            android:layout_width="91dp"
+            android:layout_height="91dp"
+            android:background="@drawable/weight"
+            android:layout_below="@id/blood_fat"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:gravity="center"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/lung_capcity"
+            android:layout_width="91dp"
+            android:layout_height="91dp"
+            android:background="@drawable/lung_capcity"
+            android:layout_below="@id/height"
+            android:layout_toRightOf="@id/weight"
+            android:layout_marginTop="70dp"
+            android:gravity="center"
+            android:text="TextView" />
+
+        <!--胆固醇-->
+        <TextView
+            android:id="@+id/cholesterol"
+            android:layout_width="91dp"
+            android:layout_height="91dp"
+            android:background="@drawable/cholesterol"
+            android:layout_below="@id/weight"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:gravity="center"
+            android:text="TextView" />
+
+        <!--载脂蛋白-->
+        <TextView
+            android:id="@+id/apolipoprotein"
+            android:layout_width="91dp"
+            android:layout_height="91dp"
+            android:background="@drawable/apolipoprotein"
+            android:layout_below="@id/lung_capcity"
+            android:layout_toRightOf="@id/cholesterol"
+            android:layout_marginTop="70dp"
+            android:gravity="center"
+            android:text="TextView" />
+
+        <!--尿素-->
+        <TextView
+            android:id="@+id/urea"
+            android:layout_width="91dp"
+            android:layout_height="91dp"
+            android:background="@drawable/urea"
+            android:layout_below="@id/cholesterol"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:gravity="center"
+            android:text="TextView" />
+
+        <!--肌酐-->
+        <TextView
+            android:id="@+id/creatinine"
+            android:layout_width="91dp"
+            android:layout_height="91dp"
+            android:background="@drawable/creatinine"
+            android:layout_below="@id/apolipoprotein"
+            android:layout_toRightOf="@id/urea"
+            android:layout_marginTop="70dp"
+            android:gravity="center"
+            android:text="TextView" />
+
+    </RelativeLayout>
+</ScrollView>
+

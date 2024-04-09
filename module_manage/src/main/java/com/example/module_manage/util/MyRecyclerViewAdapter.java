@@ -1,6 +1,7 @@
 package com.example.module_manage.util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.module_manage.R;
 import com.example.module_manage.fragment.FirstPage;
+import com.example.module_manage.showinfomation.ShowActivity;
 
 import java.util.List;
 
@@ -55,6 +57,16 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         Glide.with(context)
                 .load(imageUrl)
                 .into(holder.mImageView);
+
+        //在这里处理活动的点击事件
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ShowActivity.class);
+                intent.putExtra("id",mData.get(position).getId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
