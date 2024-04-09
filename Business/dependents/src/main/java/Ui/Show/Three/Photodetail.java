@@ -1,14 +1,5 @@
 package Ui.Show.Three;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
@@ -27,13 +18,22 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.Base.main.Service.Data.older.Postavaterphoto;
 import com.example.Base.main.Service.ViewModel.OlderViewModel;
-import com.example.Business.dependents.MainActivity2;
-import com.example.Business.dependents.R;
+import com.example.Business.elders.MainActivity1;
+import com.example.Business.elders.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.io.File;
@@ -58,8 +58,8 @@ public class Photodetail extends AppCompatActivity {
     Button buttom3;
     View bottomSheetView;
 
-    OlderViewModel olderViewModel;
-    private File imageFile;
+     OlderViewModel olderViewModel;
+    private  File imageFile;
     public BottomSheetDialog bottomSheetDialog;//底层抽屉
 
     String   mCurrentPhotoPath;
@@ -72,16 +72,16 @@ public class Photodetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photodetail);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        //获取服务端数据
-        getCloudData();
+        String imagePath = getIntent().getStringExtra("imagePath");
         //处理底边抽屉
         dealbottomSheet();
         //获取实例
         initView();
-        String imagePath = getIntent().getStringExtra("imagePath");
         Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-        imageView2.setImageBitmap(bitmap); // 加载本地图片
+        Glide.with(this).load(imagePath).into(imageView2);
+        //获取服务端数据
+        getCloudData();
+
         //点击事件
         initClick();
     }
@@ -144,8 +144,8 @@ public class Photodetail extends AppCompatActivity {
         buttom1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //请求权限
-                requestPermissions();
+                        //请求权限
+                  requestPermissions();
             }
         });
         buttom2.setOnClickListener(new View.OnClickListener() {
@@ -191,11 +191,11 @@ public class Photodetail extends AppCompatActivity {
                                 String fileName = "cached_image1.jpg";
                                 imageFile = new File(cacheDir, fileName);
                                 try {
-                                    MainActivity2.copyFile(resource, imageFile);
+                                    MainActivity1.copyFile(resource, imageFile);
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
-                                olderViewModel.postAvaterPhoto(imageFile, MainActivity2.auth);
+                                olderViewModel.postAvaterPhoto(imageFile, MainActivity1.auth);
                                 // 创建一个Intent对象
                                 Intent intent = new Intent();
                                 String imagePath = imageFile.getAbsolutePath();
@@ -220,11 +220,11 @@ public class Photodetail extends AppCompatActivity {
             // 可以使用mCurrentPhotoPath路径下的图片文件了
             Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath);
             imageView2.setImageBitmap(bitmap);
-            // 定义您想要保存的新文件名
+        // 定义您想要保存的新文件名
             String fileName = "cached_image1.jpg";
-            // 调用保存方法
+         // 调用保存方法
             imageFile = saveBitmapToCacheDir(this, bitmap, fileName);
-            olderViewModel.postAvaterPhoto(imageFile, MainActivity2.auth);
+            olderViewModel.postAvaterPhoto(imageFile, MainActivity1.auth);
             // 创建一个Intent对象
             Intent intent = new Intent();
             String imagePath = imageFile.getAbsolutePath();

@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.ImageViewTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.example.Business.elders.MainActivity1;
 import com.example.Business.elders.R;
 
 
@@ -43,12 +44,15 @@ public class ImageAdapter  extends RecyclerView.Adapter<ImageAdapter.VideoViewHo
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
         return new VideoViewHolder(view);
     }
-
+    String data;
     @Override
     public void onBindViewHolder(@NonNull VideoViewHolder holder, int position) {
         //得到数据
       String url = imageview.getImage().getData().get(position).getUrl();
-      String data =imageview .getText().get(position).getData();
+      if (imageview .getText().get(position)!=null)
+      {
+          data =imageview .getText().get(position).getData();
+      }
       String id = imageview.getImage().getData().get(position).getId();
 
 // 设置视频标题等信息
@@ -83,6 +87,7 @@ public class ImageAdapter  extends RecyclerView.Adapter<ImageAdapter.VideoViewHo
 //                 intent.putExtra("videodata", data);
                  intent.putExtra("videopath", url);
                  intent.putExtra("id",id);
+                 intent.putExtra("anth", MainActivity1.auth);
                 context.startActivity(intent);
             }
         });

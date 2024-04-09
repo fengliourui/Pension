@@ -18,10 +18,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pension">
         <activity
+            android:name="Ui.Show.Two.DetailData"
+            android:exported="false" />
+        <activity
             android:name="Ui.Show.Three.SumBmit"
             android:exported="false" />
         <activity
             android:name="Ui.Show.Three.Bind"
+            android:exported="false" />
+        <activity
+            android:name="Ui.Show.Three.Activity1"
+            android:exported="false" />
+        <activity
+            android:name="Ui.Show.Three.OlderDetail"
+            android:exported="false" />
+        <activity
+            android:name="Ui.Show.Three.Photodetail"
             android:exported="false" />
 
         <provider
@@ -34,12 +46,6 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity
-            android:name="Ui.Show.Three.Photodetail"
-            android:exported="false" />
-        <activity
-            android:name="Ui.Show.first.Fragmentvide"
-            android:exported="false" />
         <activity
             android:name=".MainActivity2"
             android:exported="true">

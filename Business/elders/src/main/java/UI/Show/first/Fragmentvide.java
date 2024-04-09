@@ -47,6 +47,7 @@ import UI.Adapter.CommitAdapter;
 public class Fragmentvide extends AppCompatActivity {
 
     private VideoView videoView;
+
     private TextView textView;
 
     private LinearLayout fullscreenButton;
@@ -77,7 +78,7 @@ public class Fragmentvide extends AppCompatActivity {
     public EditText editText;
     public Button sendText;
     public   RecyclerView recyclerView;
-
+    String anth ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +87,7 @@ public class Fragmentvide extends AppCompatActivity {
         path = getIntent().getStringExtra("videopath");
         data = getIntent().getStringExtra("videodata");
         id = getIntent().getStringExtra("id");
+        anth = getIntent().getStringExtra("anth");
 
         //从服务器获取数据
         getCloudData();
@@ -100,7 +102,7 @@ public class Fragmentvide extends AppCompatActivity {
 
     private void getCloudData() {
         olderViewModel = new ViewModelProvider(this).get(OlderViewModel.class);
-        olderViewModel.getNewCommentNums(id, MainActivity1.auth);//获取点赞评论数量
+        olderViewModel.getNewCommentNums(id, anth);//获取点赞评论数量
         olderViewModel.getNewCommentNumsLiveData.observe(this, new Observer<VideoMessage>() {
             @Override
             public void onChanged(VideoMessage videoMessage1) {
@@ -142,7 +144,7 @@ public class Fragmentvide extends AppCompatActivity {
                 }
             }
         });
-        olderViewModel.getNewComments(MainActivity1.auth,id,"1");//获取评论
+        olderViewModel.getNewComments(anth,id,"1");//获取评论
         //评论区的处理设置
         // 初始化 BottomSheetDialog
         bottomSheetDialog = new BottomSheetDialog(Fragmentvide.this);
@@ -213,12 +215,6 @@ public class Fragmentvide extends AppCompatActivity {
 
     private void viDeoDeal() {
         videoView.setVideoURI(Uri.parse(path));
-//这里是视频控制器
-// 创建并设置MediaController
-//        MediaController mediaController = new MediaController(this);
-//        mediaController.setAnchorView(videoView);
-//        videoView.setMediaController(null);
-//        videoView.setMediaController(mediaController);
 // 可选：监听视频准备完成，隐藏预览图
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
@@ -326,6 +322,7 @@ public class Fragmentvide extends AppCompatActivity {
                 Intent intent = new Intent(Fragmentvide.this, All.class);
                 intent.putExtra("videopath", path);
                 intent.putExtra("videodata", data);
+                intent.putExtra("anth", MainActivity1.auth);
                 startActivity(intent);
             }
         });
@@ -336,13 +333,13 @@ public class Fragmentvide extends AppCompatActivity {
                 int color1 = Color.parseColor("#00000000");
                 if (a2 == true)//表示他现在是在选中状态，点击变为不选中状态
                 {
-                    olderViewModel.likeDeal(id,"1", MainActivity1.auth);
+                    olderViewModel.likeDeal(id,"1", anth);
                     changeImageColor(dotView, color1);
                     t2--;
                     textView2.setText(String.valueOf(t2));
                     a2 = !a2;
                 } else {
-                    olderViewModel.likeDeal(id,"0", MainActivity1.auth);
+                    olderViewModel.likeDeal(id,"0",anth);
                     animateImageColorChange(dotView, color1, color);
                     t2++;
                     textView2.setText(String.valueOf(t2));
@@ -357,13 +354,13 @@ public class Fragmentvide extends AppCompatActivity {
                 int color1 = Color.parseColor("#00000000");
                 if (a3 == true)//表示他现在是在选中状态，点击变为不选中状态
                 {
-                    olderViewModel.goodDeal(id, MainActivity1.auth);
+                    olderViewModel.goodDeal(id,anth);
                     changeImageColor(collectionView, color1);
                     t3--;
                     textView3.setText(String.valueOf(t3));
                     a3 = !a3;
                 } else {
-                    olderViewModel.goodDeal(id, MainActivity1.auth);
+                    olderViewModel.goodDeal(id, anth);
                     animateImageColorChange(collectionView, color1, color);
                     t3++;
                     textView3.setText(String.valueOf(t3));
@@ -389,8 +386,8 @@ public class Fragmentvide extends AppCompatActivity {
                 else
                 {
                     publishCommentVo s1= new publishCommentVo(s,id);
-                    olderViewModel.postComment(s1, MainActivity1.auth);
-                    olderViewModel.getNewComments(MainActivity1.auth,id,"1");//获取评论
+                    olderViewModel.postComment(s1,anth);
+                    olderViewModel.getNewComments(anth,id,"1");//获取评论
                 }
             }
         });

@@ -19,10 +19,10 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.ImageViewTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.Base.main.Service.Data.photo.Imageview;
+import com.example.Business.dependents.MainActivity2;
 import com.example.Business.dependents.R;
 
-
-import Ui.Show.first.Fragmentvide;
+import UI.Show.first.Fragmentvide;
 
 public class ImageAdapter  extends RecyclerView.Adapter<ImageAdapter.VideoViewHolder>{
     private Imageview imageview; // 假设有一个Video类来表示视频数据
@@ -84,6 +84,7 @@ public class ImageAdapter  extends RecyclerView.Adapter<ImageAdapter.VideoViewHo
                  intent.putExtra("videodata", data);
                  intent.putExtra("videopath", url);
                  intent.putExtra("id",id);
+                 intent.putExtra("anth", MainActivity2.auth);
                 context.startActivity(intent);
             }
         });

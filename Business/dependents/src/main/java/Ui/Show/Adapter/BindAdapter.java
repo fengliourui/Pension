@@ -1,6 +1,9 @@
 package Ui.Show.Adapter;
 
+import android.content.Intent;
+
 import android.content.Context;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +19,8 @@ import com.example.Base.main.Service.Data.add.OlderBind;
 import com.example.Base.main.Service.Data.add.OlderDTO;
 import com.example.Business.dependents.R;
 
-
+import Ui.Show.Three.Bind;
+import Ui.Show.Two.DetailData;
 
 
 public class BindAdapter extends RecyclerView.Adapter<BindAdapter.BindHolder> {
@@ -32,6 +36,7 @@ public class BindAdapter extends RecyclerView.Adapter<BindAdapter.BindHolder> {
     @Override
     public BindHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item22, parent, false);
+
         return new BindHolder(view);
     }
 
@@ -41,9 +46,16 @@ public class BindAdapter extends RecyclerView.Adapter<BindAdapter.BindHolder> {
         Glide.with(context)
                 .load(olderDTO.getAvatarUrl()) // 加载指定URL的图片
                 .placeholder(R.drawable.qth) // 设置占位图，可选
-                .error(R.drawable.error) // 加载失败时显示的图片，可选
                 .into(holder.imageView); // 将图片加载到指定的ImageView中
         holder.name.setText(olderDTO.getOlderName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailData.class);
+                intent.putExtra("id",olderDTO.getOlderId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

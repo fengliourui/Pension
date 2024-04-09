@@ -19,7 +19,6 @@
         <activity
             android:name="UI.Show.Three.Activity1"
             android:exported="false" />
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.Business.fileprovider"

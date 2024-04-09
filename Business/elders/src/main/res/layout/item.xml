@@ -18,15 +18,16 @@
                         <VideoView
                             android:id="@+id/video"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
+                            android:layout_height="wrap_content"
                             android:layout_margin="4dp"/>
                         <ImageView
                             android:id="@+id/qwth"
                             android:layout_width="match_parent"
-                            android:layout_height="100dp"
+                            android:layout_height="wrap_content"
                             android:layout_margin="4dp"
-                            android:scaleType="centerCrop"
-                            android:background="@drawable/q"/>
+                            android:adjustViewBounds="true"
+                            android:scaleType="fitCenter"
+                           android:src="@drawable/qth"/>
                 </FrameLayout>
 
                 <TextView

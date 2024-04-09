@@ -13,6 +13,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import com.example.Base.main.Service.Data.photo.Imageview;
 import com.example.Base.main.Service.ViewModel.ImageViewViewModel;
 import com.example.Business.elders.MainActivity1;
@@ -65,16 +67,18 @@ public class Fragment1 extends Fragment {
 
     private void bannerInit() {
         bannerImageUrls = new ArrayList<>();
-        bannerImageUrls.add("https://img.zcool.cn/community/01aed059be4dd6a801212fb7d86c6a.jpg@1280w_1l_2o_100sh.jpg");
-        bannerImageUrls.add("https://img.zcool.cn/community/0188015e040d60a80120a895716e0e.jpg@1280w_1l_2o_100sh.jpg");
-        bannerImageUrls.add("https://cdn.pixabay.com/photo/2018/08/03/08/33/food-3581341_960_720.jpg");
-        bannerImageUrls.add("https://img.zcool.cn/community/011d615ab31f99a801218207354a37.JPG@1280w_1l_2o_100sh.jpg");
+        bannerImageUrls.add("https://th.bing.com/th/id/R.142034cef407da71368669ab4c5ff11f?rik=gI3Aazyw6FJUKQ&pid=ImgRaw&r=0");
+        bannerImageUrls.add("https://pic.quanjing.com/xx/ta/QJ6146842590.jpg?x-oss-process=style/794ws");
+        bannerImageUrls.add("https://img95.699pic.com/photo/40014/9815.jpg_wh860.jpg");
         bannerLayout.setAdapter(new BannerImageAdapter(bannerImageUrls));
     }
     private void getCloudData() {
         imageViewViewModel = new ViewModelProvider(this).get(ImageViewViewModel.class);
          recyclerView = view.findViewById(R.id.recyclerView1);
-        recyclerView.setLayoutManager(new GridLayoutManager(view.getContext(), 2));
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+// 设置错落效果
+        layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
+        recyclerView.setLayoutManager(layoutManager);
         imageViewViewModel.getImageView("1", "100", MainActivity1.auth);
         imageViewViewModel.ImageviewLiveData.observe(getViewLifecycleOwner(), new Observer<Imageview>() {
             @Override
@@ -96,6 +100,10 @@ public class Fragment1 extends Fragment {
                         @Override
                         public void onChanged(Imageview imageview) {
                             loadingText.setVisibility(View.GONE);
+                            StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+// 设置错落效果
+                            layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
+                            recyclerView.setLayoutManager(layoutManager);
                             ImageAdapter adapter = new  ImageAdapter(getContext(),imageview);
                             recyclerView.setAdapter(adapter); // 设置适配器
                         }
@@ -111,6 +119,10 @@ public class Fragment1 extends Fragment {
                         @Override
                         public void onChanged(Imageview imageview) {
                             loadingText.setVisibility(View.GONE);
+                            StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+// 设置错落效果
+                            layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
+                            recyclerView.setLayoutManager(layoutManager);
                             ImageAdapter adapter = new  ImageAdapter(getContext(),imageview);
                             recyclerView.setAdapter(adapter); // 设置适配器
                         }

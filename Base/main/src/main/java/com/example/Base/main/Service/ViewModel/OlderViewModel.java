@@ -1,6 +1,8 @@
 package com.example.Base.main.Service.ViewModel;
 
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
@@ -10,6 +12,8 @@ import com.example.Base.main.Service.Data.Activity.ActivityOne;
 import com.example.Base.main.Service.Data.Activity.Activtyall;
 import com.example.Base.main.Service.Data.Activity.Postactivity;
 import com.example.Base.main.Service.Data.Activity.SignUpActivityVo;
+import com.example.Base.main.Service.Data.Health.AllData;
+import com.example.Base.main.Service.Data.Health.ShowData;
 import com.example.Base.main.Service.Data.Parameter.BinOlder;
 import com.example.Base.main.Service.Data.Parameter.Comm;
 import com.example.Base.main.Service.Data.Parameter.Five;
@@ -26,6 +30,7 @@ import com.example.Base.main.Service.Data.add.OlderBind;
 import com.example.Base.main.Service.Data.add.VideoMessage;
 import com.example.Base.main.Service.Data.add.nameAndIdentifyId;
 import com.example.Base.main.Service.Data.add.publishCommentVo;
+import com.example.Base.main.Service.Data.nusion.Nurse;
 import com.example.Base.main.Service.Data.older.Avatar;
 import com.example.Base.main.Service.Data.older.Message;
 import com.example.Base.main.Service.Data.older.Name;
@@ -60,6 +65,8 @@ public class OlderViewModel extends ViewModel {
     public MutableLiveData<Mss> locationLiveData16 = new MutableLiveData<>();//修改昵称
     public MutableLiveData<String> locationLiveData17 = new MutableLiveData<>();//获取所有的已绑定的信息
     public MutableLiveData<BinOlder> locationLiveData18 = new MutableLiveData<>();//绑定新的老人
+    public MutableLiveData<Two> locationLiveData19 = new MutableLiveData<>();
+    public MutableLiveData<Two> locationLiveData20 = new MutableLiveData<>();
 
     public LiveData<Older> OlderLiveData = Transformations.switchMap(locationLiveData, auth -> {//老人的基本信息
         return  Repository.getOlderLiveData(auth);
@@ -136,7 +143,12 @@ public class OlderViewModel extends ViewModel {
     public LiveData<Binddat> PostOlderBindLiveData = Transformations.switchMap(locationLiveData18, OlderBind -> {//获取所有活动展示
         return  Repository.PostOlerBind(OlderBind.getNameAndIdentifyId(),OlderBind.getAuth());
     });
-
+    public LiveData<ShowData> DataDetailLiveData = Transformations.switchMap(locationLiveData19, two -> {//获取所有活动展示
+        return  Repository.getOlerDataDetail(two.getData1(),two.getData2());
+    });
+   public LiveData<Nurse> PostNurseLiveData = Transformations.switchMap(locationLiveData20, two -> {//获取所有活动展示
+        return  Repository.Postnurse(two.getData1(),two.getData2());
+    });
 
 
     public void  getolder (String auth) {
@@ -236,6 +248,16 @@ public class OlderViewModel extends ViewModel {
     {
         BinOlder binOlder = new BinOlder(nameAndIdentifyId,auth);
         locationLiveData18.postValue(binOlder);
+    }
+    public void getOlerDataDetail(String auth,String id)
+    {
+       Two two = new Two(auth,id);
+        locationLiveData19.postValue(two);
+    }
+    public void Postnurse(String content,String auth)
+    {
+        Two two = new Two(content,auth);
+        locationLiveData20.postValue(two);
     }
 }
 

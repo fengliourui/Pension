@@ -1,5 +1,7 @@
 package com.example.Base.main.Service;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -7,6 +9,8 @@ import com.example.Base.main.Service.Data.Activity.ActivityOne;
 import com.example.Base.main.Service.Data.Activity.Activtyall;
 import com.example.Base.main.Service.Data.Activity.Postactivity;
 import com.example.Base.main.Service.Data.Activity.SignUpActivityVo;
+import com.example.Base.main.Service.Data.Health.AllData;
+import com.example.Base.main.Service.Data.Health.ShowData;
 import com.example.Base.main.Service.Data.add.Binddat;
 import com.example.Base.main.Service.Data.add.Commentlikes;
 import com.example.Base.main.Service.Data.add.Deletecommentld;
@@ -16,6 +20,7 @@ import com.example.Base.main.Service.Data.add.OlderBind;
 import com.example.Base.main.Service.Data.add.VideoMessage;
 import com.example.Base.main.Service.Data.add.nameAndIdentifyId;
 import com.example.Base.main.Service.Data.add.publishCommentVo;
+import com.example.Base.main.Service.Data.nusion.Nurse;
 import com.example.Base.main.Service.Data.older.Avatar;
 import com.example.Base.main.Service.Data.older.Message;
 import com.example.Base.main.Service.Data.older.Name;
@@ -32,6 +37,9 @@ import com.example.Base.main.Service.Data.photo.Text;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 
 public class Repository {
@@ -153,14 +161,12 @@ public class Repository {
     }
     public static List<OssFileDTO> convertToOssFileDTOList(List<Good> goodList) {
         List<OssFileDTO> ossFileDTOList = new ArrayList<>();
-
         for (Good good : goodList) {
             OssFileDTO ossFileDTO = new OssFileDTO();
             ossFileDTO.setId(good.getVideoId());
             ossFileDTO.setUrl(good.getVideoUrl());
             ossFileDTOList.add(ossFileDTO);
         }
-
         return ossFileDTOList;
     }
 
@@ -265,6 +271,26 @@ public class Repository {
         MutableLiveData<Binddat> liveData = new MutableLiveData<>();
         new Thread(() -> {
             Binddat name= Network.postOlerBind(nameAndIdentifyId,auth);
+            liveData.postValue(name);
+        }).start();
+        return liveData;
+    }
+    public static LiveData<ShowData> getOlerDataDetail(String auth, String id) {
+        MutableLiveData<ShowData> liveData = new MutableLiveData<>();
+        new Thread(() -> {
+            ShowData name= Network.getOlerDataDetail(auth,id);
+            liveData.postValue(name);
+        }).start();
+        return liveData;
+    }
+    public static Future<AllData> getOlderData() {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        return executor.submit(() -> Network.getOlderData());
+    }
+    public static LiveData<Nurse> Postnurse(String requestData,String auth) {
+        MutableLiveData<Nurse> liveData = new MutableLiveData<>();
+        new Thread(() -> {
+            Nurse name= Network.Postnurse(requestData,auth);
             liveData.postValue(name);
         }).start();
         return liveData;

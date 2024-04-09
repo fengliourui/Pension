@@ -1,26 +1,22 @@
 package Ui.Show.Three;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
-import android.content.Intent;
-
-import android.os.Bundle;
-import android.view.View;
-
-import android.widget.Button;
-import android.widget.TextView;
-
 import com.example.Base.main.Service.Data.add.OlderBind;
 import com.example.Base.main.Service.ViewModel.OlderViewModel;
 import com.example.Business.dependents.MainActivity2;
 import com.example.Business.dependents.R;
-
-
 
 import Ui.Show.Adapter.BindAdapter;
 

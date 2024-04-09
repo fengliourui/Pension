@@ -31,6 +31,12 @@
             android:name="UI.Show.Two.Ativitydetail"
             android:exported="false" />
         <activity
+            android:name="UI.Show.Three.Activity2"
+            android:exported="false" />
+        <activity
+            android:name="UI.Show.Three.Activity1"
+            android:exported="false" />
+        <activity
             android:name="UI.Show.Three.Photodetail"
             android:exported="false" />
         <activity

@@ -6,6 +6,8 @@ import com.example.Base.main.Service.Data.Activity.ActivityOne;
 import com.example.Base.main.Service.Data.Activity.Activtyall;
 import com.example.Base.main.Service.Data.Activity.Postactivity;
 import com.example.Base.main.Service.Data.Activity.SignUpActivityVo;
+import com.example.Base.main.Service.Data.Health.AllData;
+import com.example.Base.main.Service.Data.Health.ShowData;
 import com.example.Base.main.Service.Data.add.Binddat;
 import com.example.Base.main.Service.Data.add.Commentlikes;
 import com.example.Base.main.Service.Data.add.Deletecommentld;
@@ -15,6 +17,7 @@ import com.example.Base.main.Service.Data.add.OlderBind;
 import com.example.Base.main.Service.Data.add.VideoMessage;
 import com.example.Base.main.Service.Data.add.nameAndIdentifyId;
 import com.example.Base.main.Service.Data.add.publishCommentVo;
+import com.example.Base.main.Service.Data.nusion.Nurse;
 import com.example.Base.main.Service.Data.older.Avatar;
 import com.example.Base.main.Service.Data.older.Message;
 import com.example.Base.main.Service.Data.older.Name;
@@ -353,8 +356,48 @@ public class Network {
             if (response.isSuccessful()) {
                 return response.body();
             } else {
-                message = response.message();
-                Log.d("ttttt",response.message());
+                throw new IOException("Unexpected HTTP code: " + response.code());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null; // 或者抛出适当的异常
+        }
+    }
+    public static AllData getOlderData() {
+        try {
+            Response<AllData> response = Service.getOlerData().execute();
+            if (response.isSuccessful()) {
+                return response.body();
+            } else {
+                throw new IOException("Unexpected HTTP code: " + response.code());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null; // 或者抛出适当的异常
+        }
+    }
+    public static ShowData getOlerDataDetail(String auth, String id) {
+        try {
+            Response<ShowData> response = Service.getOlerDataDetail(auth,id).execute();
+            if (response.isSuccessful()) {
+                return response.body();
+            } else {
+                throw new IOException("Unexpected HTTP code: " + response.code());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null; // 或者抛出适当的异常
+        }
+    }
+    public static Nurse Postnurse(String requestData,String auth) {
+        try {
+            Response<Nurse> response = Service.postnurse(requestData,auth).execute();
+            Log.d("ttttt",requestData );
+            Log.d("ttttt",auth);
+            if (response.isSuccessful()) {
+                return response.body();
+            } else {
+                Log.d("ttttt","Unexpected HTTP code: " + response.code());
                 throw new IOException("Unexpected HTTP code: " + response.code());
             }
         } catch (IOException e) {

@@ -7,6 +7,8 @@ import com.example.Base.main.Service.Data.Activity.ActivityOne;
 import com.example.Base.main.Service.Data.Activity.Activtyall;
 import com.example.Base.main.Service.Data.Activity.Postactivity;
 import com.example.Base.main.Service.Data.Activity.SignUpActivityVo;
+import com.example.Base.main.Service.Data.Health.AllData;
+import com.example.Base.main.Service.Data.Health.ShowData;
 import com.example.Base.main.Service.Data.add.Binddat;
 import com.example.Base.main.Service.Data.add.Commentlikes;
 import com.example.Base.main.Service.Data.add.Deletecommentld;
@@ -16,6 +18,7 @@ import com.example.Base.main.Service.Data.add.OlderBind;
 import com.example.Base.main.Service.Data.add.VideoMessage;
 import com.example.Base.main.Service.Data.add.nameAndIdentifyId;
 import com.example.Base.main.Service.Data.add.publishCommentVo;
+import com.example.Base.main.Service.Data.nusion.Nurse;
 import com.example.Base.main.Service.Data.older.Avatar;
 import com.example.Base.main.Service.Data.older.Message;
 import com.example.Base.main.Service.Data.older.Name;
@@ -150,5 +153,19 @@ public interface Service {
     Call<Binddat> postolderBind(//家属提交绑定的老人
                                 @Body nameAndIdentifyId nameAndIdentifyId,  // 将请求体数据放在 URL 参数中
                                 @Query("auth") String auth
+    );
+    @GET("/older/getdatatype")
+    Call<AllData> getOlerData(//获取老人数据类型
+    );
+
+    @GET("/older/getolder")
+    Call<ShowData> getOlerDataDetail(//获取老人数据类型
+                                     @Query("auth") String auth,
+                                     @Query("olderid") String id
+    );
+    @POST("/nursing/upload/older")
+    Call<Nurse> postnurse(//活动报名
+                            @Body String requestData,  // 将请求体数据放在 URL 参数中
+                            @Query("auth") String auth
     );
 }
