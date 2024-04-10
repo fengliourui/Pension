@@ -36,6 +36,10 @@ public class Main extends AppCompatActivity {
         getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
 
+        //设置状态栏颜色
+        getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+
         navigationView = findViewById(R.id.nav_bottom);
         viewPager = findViewById(R.id.vp);
 
