@@ -52,6 +52,9 @@ public class addActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
+        getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+
         //binding
         binding = ActivityAddBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

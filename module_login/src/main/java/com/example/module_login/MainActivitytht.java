@@ -50,6 +50,11 @@ public class  MainActivitytht extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //设置状态栏
+        getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+
         //viewbinding
         binding = ActivityMainBinding.inflate(getLayoutInflater());//从xml布局文件中加载试图
         setContentView(binding.getRoot());//并将其设置为activity的内容视图

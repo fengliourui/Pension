@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.module_manage.fragment.FirstPage;
@@ -30,6 +31,10 @@ public class Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_main);
         token = getIntent().getStringExtra("auth");
+
+        //设置状态栏颜色
+        getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
 
         navigationView = findViewById(R.id.nav_bottom);
         viewPager = findViewById(R.id.vp);

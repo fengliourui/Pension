@@ -47,6 +47,9 @@ public class relation_password extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relation_password);
 
+        getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+
         //viewbinding
         binding = ActivityRelationPasswordBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
