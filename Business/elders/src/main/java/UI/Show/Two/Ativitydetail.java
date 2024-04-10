@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -36,7 +37,7 @@ public class Ativitydetail extends AppCompatActivity {
     private TextView applyTime;//报名时间
     private TextView mainnew;//活动简介
     private Button apply ;//报名按钮
-    private LinearLayout background ;//背景
+    private ImageView background ;//背景
     private  String id ;
     private  String url ;
     private OlderViewModel olderViewModel;
@@ -46,26 +47,9 @@ public class Ativitydetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ativitydetail);
         id = getIntent().getStringExtra("id");
-        url = getIntent().getStringExtra("url");
+        url = getIntent().getStringExtra("imageurl");
         olderViewModel  = new ViewModelProvider(this).get(OlderViewModel.class);
         getWindow().setStatusBarColor(Color.TRANSPARENT); // 透明状态栏
-        if(url!=null)
-        {
-            ImageView imageView = new ImageView(this);
-            Glide.with(this)
-                    .load(url)
-                    .centerCrop()
-                    .into(new CustomTarget<Drawable>() {
-                        @Override
-                        public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
-                            getWindow().setBackgroundDrawable(resource);
-                        }
-                        @Override
-                        public void onLoadCleared(@Nullable Drawable placeholder) {
-                        }
-                    });
-        }
-        getWindow().setBackgroundDrawableResource(R.drawable.img); // 设置状态栏背景
         initView();
         initClick();
         getMessage();
@@ -75,6 +59,7 @@ public class Ativitydetail extends AppCompatActivity {
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("tttt",id);
                 olderViewModel.postActivity(id, MainActivity1.auth);
             }
         });
@@ -82,9 +67,9 @@ public class Ativitydetail extends AppCompatActivity {
             @Override
             public void onChanged(Postactivity postactivity) {
                 if (postactivity != null) {
-                    Toast.makeText(Ativitydetail.this,postactivity.getData(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(Ativitydetail.this,"222",Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(Ativitydetail.this, Network.message,Toast.LENGTH_LONG).show();
+                    Toast.makeText(Ativitydetail.this, "111",Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -118,8 +103,7 @@ public class Ativitydetail extends AppCompatActivity {
                 mainnew.setText(activityOne.getData().getIntroduce());
                 if(url!=null)
                 {
-                    Drawable drawable = Drawable.createFromPath(url);
-                    background.setBackground(drawable);
+                    Glide.with(Ativitydetail.this).load(url).into(background);
                 }
             }
         });

@@ -5,6 +5,7 @@ package UI.Show.Three;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -17,6 +18,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.Base.main.Service.Data.Activity.ActivityUsers;
+import com.example.Base.main.Service.Data.Activity.ActivtyUser;
 import com.example.Base.main.Service.Data.Activity.Activtyall;
 import com.example.Base.main.Service.ViewModel.OlderViewModel;
 import com.example.Business.elders.MainActivity1;
@@ -26,7 +29,6 @@ import UI.Adapter.ActivtyAdapter;
 
 
 public class Activity2 extends AppCompatActivity {
-    public Activtyall activtyall1;
     public TextView textView;
     RecyclerView recyclerView;
     OlderViewModel olderViewModel;
@@ -45,6 +47,8 @@ public class Activity2 extends AppCompatActivity {
             View decorView = window.getDecorView();
             decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
+        initView();
+        getCloudData();
     }
     private void initView() {
         recyclerView = findViewById(R.id.tttt5);
@@ -54,16 +58,16 @@ public class Activity2 extends AppCompatActivity {
     }
 
     private void getCloudData() {
-
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         // 观察LiveData，更新适配器数据
         olderViewModel.getUserActivity(MainActivity1.auth,"3");
-        olderViewModel.getUserACtivityLiveData.observe(this, new Observer<Activtyall>() {
+        olderViewModel.getUserACtivityLiveData.observe(this, new Observer<ActivityUsers>() {
             @Override
-            public void onChanged(Activtyall activtyall) {
-                activtyall1=activtyall;
+            public void onChanged(ActivityUsers activtyall) {
+                Log.d("ttttt", String.valueOf(activtyall.getUsers().size()));
                 activtyAdapter = new ActivtyAdapter(activtyall,Activity2.this);
-                if(activtyall.getData().size()!=0)
+                recyclerView.setAdapter(activtyAdapter); // 设置适配器
+                if(activtyall.getUsers().size()!=0)
                 {
                     linearLayout.setVisibility(View.GONE);
                 }
@@ -71,7 +75,6 @@ public class Activity2 extends AppCompatActivity {
                 {
                     textView.setText("您暂无参加活动");
                 }
-                recyclerView.setAdapter(activtyAdapter); // 设置适配器
             }
         });
     }

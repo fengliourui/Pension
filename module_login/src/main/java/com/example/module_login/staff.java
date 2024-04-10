@@ -46,6 +46,9 @@ public class staff extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff);
 
+        getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+
         //viewbinding
         binding = ActivityStaffBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

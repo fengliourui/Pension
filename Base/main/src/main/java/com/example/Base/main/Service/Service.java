@@ -4,9 +4,11 @@ package com.example.Base.main.Service;
 import retrofit2.Call;
 
 import com.example.Base.main.Service.Data.Activity.ActivityOne;
+import com.example.Base.main.Service.Data.Activity.ActivityUsers;
+import com.example.Base.main.Service.Data.Activity.ActivtyUser;
 import com.example.Base.main.Service.Data.Activity.Activtyall;
 import com.example.Base.main.Service.Data.Activity.Postactivity;
-import com.example.Base.main.Service.Data.Activity.SignUpActivityVo;
+import com.example.Base.main.Service.Data.Activity.signUpActivityVo;
 import com.example.Base.main.Service.Data.Health.AllData;
 import com.example.Base.main.Service.Data.Health.ShowData;
 import com.example.Base.main.Service.Data.add.Binddat;
@@ -28,6 +30,8 @@ import com.example.Base.main.Service.Data.older.userAvatarVo;
 import com.example.Base.main.Service.Data.photo.GoodVIew;
 import com.example.Base.main.Service.Data.photo.Image;
 import com.example.Base.main.Service.Data.photo.Text;
+
+import java.util.List;
 
 import okhttp3.MultipartBody;
 import retrofit2.http.Body;
@@ -82,7 +86,7 @@ public interface Service {
     @POST("/activity/signup")
     @Headers({"accept: application/json","Content-Type: application/json"})
     Call<Postactivity> postActivity(//活动报名
-                                    @Body SignUpActivityVo signUpActivityVo,  // 将请求体数据放在 URL 参数中
+                                    @Body signUpActivityVo signUpActivityVo,  // 将请求体数据放在 URL 参数中
                                     @Query("auth") String auth
     );
     @GET("/new/get/video/collect")
@@ -120,7 +124,7 @@ public interface Service {
                             @Query("auth") String auth
     );
     @GET("/new/get/act/by-status")
-    Call<Activtyall> getUserActivity(//点赞的点击处理
+    Call<List<ActivtyUser>> getUserActivity(
             @Query("auth") String auth,
             @Query("status") String status
     );

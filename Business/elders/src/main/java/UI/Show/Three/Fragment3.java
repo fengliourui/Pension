@@ -28,8 +28,6 @@ import com.example.Business.elders.R;
 
 public class Fragment3 extends Fragment {
     private static final int REQUEST_CODE = 1;
-
-
     private static final int REQUEST_CODE_OLDER_DETAIL_1 = 2;
     LinearLayout linearLayout1;//点击展开详细老人信息
     LinearLayout linearLayout2;//点击展开详细老人信息
@@ -70,13 +68,6 @@ public class Fragment3 extends Fragment {
             public void onChanged(Older older) {
                 //初始化视图
                 initialize(older);
-            }
-        });
-        olderViewModel.getUserActivity(MainActivity1.auth,"3");
-        olderViewModel.getUserACtivityLiveData.observe(getViewLifecycleOwner(), new Observer<Activtyall>() {
-            @Override
-            public void onChanged(Activtyall activtyall1) {
-                activtyall=activtyall1;
             }
         });
         olderViewModel.getUserMess(MainActivity1.auth);

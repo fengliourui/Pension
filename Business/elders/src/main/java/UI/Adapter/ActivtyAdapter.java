@@ -16,6 +16,8 @@
 
     import com.bumptech.glide.Glide;
     import com.example.Base.main.Service.Data.Activity.ActivityDTO;
+    import com.example.Base.main.Service.Data.Activity.ActivityUsers;
+    import com.example.Base.main.Service.Data.Activity.ActivtyUser;
     import com.example.Base.main.Service.Data.Activity.Activtyall;
     import com.example.Business.elders.R;
 
@@ -31,12 +33,17 @@
        private List<ActivityDTO> data;
         private Context mContext;
        private String imageurl;
+       private ActivityUsers activityUsers;
 
         public ActivtyAdapter(Activtyall activtyall1, Context context) {
             this.activtyall=activtyall1;
-            data=activtyall1.getData();
             this.mContext=context;
         }
+        public ActivtyAdapter(ActivityUsers activtyall1, Context context) {
+            this.activityUsers=activtyall1;
+            this.mContext=context;
+        }
+
         @NonNull
         @Override
         public ActivtyAdapter.VideoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -46,40 +53,75 @@
 
         @Override
         public void onBindViewHolder(@NonNull VideoViewHolder holder, int position) {
-            ActivityDTO activityDTO =activtyall.getData().get(position);
-            String max= String.valueOf(activityDTO.getMaxParticipants());
-            String min= String.valueOf(activityDTO.getCurParticipants());
-
-            holder.Endtextview.setText(max);     //最大人数
-            holder.nameTextview.setText(activityDTO.getTitle());    //活动名称
-            holder.newtextview.setText(min);    //目前人数
-            if(activityDTO.getImages()==null)//    图片
+            if (activtyall==null)
             {
-                imageurl=activityDTO.getImages().get(0).getUrl();
-                Glide.with(mContext)
-                        .load(imageurl)
-                        .into(holder.touxiangimageview);
-            }
-            String time = activityDTO.getStartTime()+"-----"+activityDTO.getEndTime();
-            holder.timeTextview.setText(time);//报名时间处理
+                ActivtyUser activityDTO =activityUsers.getUsers().get(position);
+                String max= String.valueOf(activityDTO.getMaxParticipants());
+                String min= String.valueOf(activityDTO.getCurParticipants());
 
-            holder.itemView.setOnClickListener(new View.OnClickListener() {//点击打开详细页
-                @Override
-                public void onClick(View v) {
-                    // 点击视频项时，跳转到新的页面
-                    Context context = holder.itemView.getContext();
-                    Intent intent = new Intent(context, Ativitydetail.class);
-                    intent.putExtra("id",activityDTO.getId());
-                    intent.putExtra("imageurl",imageurl);
-                    context.startActivity(intent);
+                holder.Endtextview.setText(max);     //最大人数
+                holder.nameTextview.setText(activityDTO.getTitle());    //活动名称
+                holder.newtextview.setText(min);    //目前人数
+                if(activityDTO.getImages().get(0).getUrl()!=null)//    图片
+                {
+                    imageurl=activityDTO.getImages().get(0).getUrl();
+                    Glide.with(mContext)
+                            .load(imageurl)
+                            .into(holder.touxiangimageview);
                 }
-            });
+                else
+                {
+                    Log.d("ttttt","htht");
+                }
+                String time = activityDTO.getStartTime()+"-----"+activityDTO.getEndTime();
+                holder.timeTextview.setText(time);//报名时间处理
+            }
+            else {
+                Activtyall.DataDTO activityDTO =activtyall.getData().get(position);
+                String max= String.valueOf(activityDTO.getMaxParticipants());
+                String min= String.valueOf(activityDTO.getCurParticipants());
 
+                holder.Endtextview.setText(max);     //最大人数
+                holder.nameTextview.setText(activityDTO.getTitle());    //活动名称
+                holder.newtextview.setText(min);    //目前人数
+                if(activityDTO.getImages().get(0).getUrl()!=null)//    图片
+                {
+                    imageurl=activityDTO.getImages().get(0).getUrl();
+                    Glide.with(mContext)
+                            .load(imageurl)
+                            .into(holder.touxiangimageview);
+                }
+                else
+                {
+                    Log.d("ttttt","htht");
+                }
+                String time = activityDTO.getStartTime()+"-----"+activityDTO.getEndTime();
+                holder.timeTextview.setText(time);//报名时间处理
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {//点击打开详细页
+                    @Override
+                    public void onClick(View v) {
+                        // 点击视频项时，跳转到新的页面
+                        Context context = holder.itemView.getContext();
+                        Intent intent = new Intent(context, Ativitydetail.class);
+                        intent.putExtra("id",activityDTO.getId());
+                        intent.putExtra("imageurl",activityDTO.getImages().get(0).getUrl());
+                        context.startActivity(intent);
+                    }
+                });
+            }
             }
 
         @Override
         public int getItemCount() {
-            return data.size();
+            if(activtyall!=null)
+            {
+                return activtyall.getData().size();
+            }
+            else
+            {
+                return  activityUsers.getUsers().size();
+            }
         }
 
         static class VideoViewHolder extends RecyclerView.ViewHolder {

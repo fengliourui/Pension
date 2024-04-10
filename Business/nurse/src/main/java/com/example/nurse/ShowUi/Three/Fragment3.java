@@ -72,12 +72,6 @@ public class Fragment3 extends Fragment {
             }
         });
         olderViewModel.getUserActivity(MainActivityTTT.auth,"3");
-        olderViewModel.getUserACtivityLiveData.observe(getViewLifecycleOwner(), new Observer<Activtyall>() {
-            @Override
-            public void onChanged(Activtyall activtyall1) {
-                activtyall=activtyall1;
-            }
-        });
         olderViewModel.getUserMess(MainActivityTTT.auth);
         olderViewModel.getUserMessLiveData.observe(getViewLifecycleOwner(), new Observer<Message>() {
             @Override

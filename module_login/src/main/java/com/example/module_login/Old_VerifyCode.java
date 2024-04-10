@@ -51,6 +51,9 @@ public class Old_VerifyCode extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_old_verify_code);
 
+        getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+
         //viewbinding
         binding = ActivityOldVerifyCodeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
