@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application
+        android:theme="@style/Theme.OldCare">
+        <activity
+            android:name=".showinfomation.ShowActivity"
+            android:exported="false" />
+        <activity
+            android:name=".showinfomation.ShowOld"
+            android:exported="false" />
+        <activity
+            android:name=".addinfo.addActivity"
+            android:exported="false" />
+        <activity
+            android:name=".addinfo.addNurse"
+            android:exported="false" />
+        <activity
+            android:name=".addinfo.addOld"
+            android:exported="false" />
+        <activity
+            android:name=".Main"
+            android:exported="false">
+        </activity>
+    </application>
+
+</manifest>

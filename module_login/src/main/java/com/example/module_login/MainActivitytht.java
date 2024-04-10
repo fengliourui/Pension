@@ -40,8 +40,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 @Route(path="/login/MainActivtyttt/1")
-public class MainActivitytht extends AppCompatActivity {
-
+public class  MainActivitytht extends AppCompatActivity {
     private ActivityMainBinding binding;
     String phoneNumber;
     String getURL;
@@ -65,7 +64,7 @@ public class MainActivitytht extends AppCompatActivity {
                     Toast.makeText(MainActivitytht.this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
                 }else{
                     getURL = Internet.addURLParam("https://beadhouse.81jcpd.cn/user/code/send","phone",phoneNumber);
-                    getURL = Internet.addURLParam(getURL,"mode","0");
+                    getURL = Internet.addURLParam(getURL,"mode","1");
                     Log.i(TAG, "请求的url是：" + getURL);
                     Request request = new Request.Builder().get()
                             .url(getURL)
@@ -101,7 +100,7 @@ public class MainActivitytht extends AppCompatActivity {
             public void onClick(@NonNull View view) {
                 Intent intent_register = new Intent(MainActivitytht.this,register.class);
                 intent_register.putExtra("who","2");
-                intent_register.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                intent_register.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent_register);
             }
         };
@@ -255,12 +254,10 @@ public class MainActivitytht extends AppCompatActivity {
                                     JSONObject dataObject = jsonObject.getJSONObject("data");
                                     String token = dataObject.getString("token");
                                     String identify = dataObject.getString("identify");
-                                    ARouter.getInstance().build("/elder/MainActivty1/1").withString("auth",token).navigation();
+                                    ARouter.getInstance().build("/dependents/MainActivty2/2").withString("auth",token).navigation();
                                     Log.i(TAG, "identify = "+ identify);
                                     Log.i(TAG, "token = "+ token);
                                 }
-
-
                             } catch (JSONException e) {
                                 throw new RuntimeException(e);
                             }

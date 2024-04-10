@@ -33,7 +33,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.example.Base.main.Service.Data.older.Postavaterphoto;
 import com.example.Base.main.Service.ViewModel.OlderViewModel;
 import com.example.Business.elders.R;
-import com.example.nurse.MainActivity3;
+import com.example.nurse.MainActivityTTT;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.io.File;
@@ -191,11 +191,11 @@ public class Photodetail extends AppCompatActivity {
                                 String fileName = "cached_image1.jpg";
                                 imageFile = new File(cacheDir, fileName);
                                 try {
-                                    MainActivity3.copyFile(resource, imageFile);
+                                    MainActivityTTT.copyFile(resource, imageFile);
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
-                                olderViewModel.postAvaterPhoto(imageFile, MainActivity3.auth);
+                                olderViewModel.postAvaterPhoto(imageFile, MainActivityTTT.auth);
                                 // 创建一个Intent对象
                                 Intent intent = new Intent();
                                 String imagePath = imageFile.getAbsolutePath();
@@ -224,7 +224,7 @@ public class Photodetail extends AppCompatActivity {
             String fileName = "cached_image1.jpg";
          // 调用保存方法
             imageFile = saveBitmapToCacheDir(this, bitmap, fileName);
-            olderViewModel.postAvaterPhoto(imageFile, MainActivity3.auth);
+            olderViewModel.postAvaterPhoto(imageFile, MainActivityTTT.auth);
             // 创建一个Intent对象
             Intent intent = new Intent();
             String imagePath = imageFile.getAbsolutePath();

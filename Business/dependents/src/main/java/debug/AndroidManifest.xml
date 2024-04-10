@@ -8,5 +8,40 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 拍照获得头像 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <application
+        android:theme="@style/Theme.Pension">
+        <activity
+            android:name="Ui.Show.Two.DetailData"
+            android:exported="false" />
+        <activity
+            android:name="Ui.Show.Three.SumBmit"
+            android:exported="false" />
+        <activity
+            android:name="Ui.Show.Three.Bind"
+            android:exported="false" />
+        <activity
+            android:name="Ui.Show.Three.Activity1"
+            android:exported="false" />
+        <activity
+            android:name="Ui.Show.Three.OlderDetail"
+            android:exported="false" />
+        <activity
+            android:name="Ui.Show.Three.Photodetail"
+            android:exported="false" />
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.Business.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity
+            android:name=".MainActivity2"
+            android:exported="true">
+        </activity>
+    </application>
 </manifest>

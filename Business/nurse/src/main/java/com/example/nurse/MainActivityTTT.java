@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
@@ -44,7 +45,8 @@ import UI.Show.first.Fragment1;
 import UI.Show.four.Fragment4;
 
 
-public class MainActivity3 extends AppCompatActivity {
+@Route(path="/nurse/MainActivty3/2")
+public class MainActivityTTT extends AppCompatActivity {
 
     private ViewPager2 viewPager;
     private TabLayout tabLayout;
@@ -60,7 +62,7 @@ public class MainActivity3 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_mainmmm);
 //        auth = getIntent().getStringExtra("auth");
         // 设置状态栏颜色为灰色
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -84,7 +86,7 @@ public class MainActivity3 extends AppCompatActivity {
                 {
                     //初始化视图
                     url = avatar.getData();
-                    Glide.with(MainActivity3.this)
+                    Glide.with(MainActivityTTT.this)
                             .downloadOnly()
                             .load(url)
                             .into(new CustomTarget<File>() {
@@ -163,8 +165,8 @@ public class MainActivity3 extends AppCompatActivity {
                     TabLayout.Tab tab =tabLayout.getTabAt(i);    //取得tab
                     if (tab.getPosition() == position) {
                         // 设置选中页面对应的Tab的提醒效果，比如修改背景颜色
-                        int white = ContextCompat.getColor(MainActivity3.this, R.color.white);
-                        int green = ContextCompat.getColor(MainActivity3.this, R.color.green);
+                        int white = ContextCompat.getColor(MainActivityTTT.this, R.color.white);
+                        int green = ContextCompat.getColor(MainActivityTTT.this, R.color.green);
                         animateTabBackgroundColor(tabLayout, position,white, green, 1000);
                     } else {
                         // 设置当前页面对应的Tab的图标

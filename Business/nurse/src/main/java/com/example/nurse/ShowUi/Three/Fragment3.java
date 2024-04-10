@@ -21,7 +21,7 @@ import com.example.Base.main.Service.Data.Activity.Activtyall;
 import com.example.Base.main.Service.Data.older.Message;
 import com.example.Base.main.Service.Data.older.Older;
 import com.example.Base.main.Service.ViewModel.OlderViewModel;
-import com.example.nurse.MainActivity3;
+import com.example.nurse.MainActivityTTT;
 import com.example.nurse.R;
 
 
@@ -63,7 +63,7 @@ public class Fragment3 extends Fragment {
 
     private void getCloudData() {
         OlderViewModel olderViewModel = new ViewModelProvider(this).get(OlderViewModel.class);
-        olderViewModel.getolder(MainActivity3.auth);//老人信息
+        olderViewModel.getolder(MainActivityTTT.auth);//老人信息
         olderViewModel.OlderLiveData.observe(getViewLifecycleOwner(), new Observer<Older>() {
             @Override
             public void onChanged(Older older) {
@@ -71,14 +71,14 @@ public class Fragment3 extends Fragment {
                 initialize(older);
             }
         });
-        olderViewModel.getUserActivity(MainActivity3.auth,"3");
+        olderViewModel.getUserActivity(MainActivityTTT.auth,"3");
         olderViewModel.getUserACtivityLiveData.observe(getViewLifecycleOwner(), new Observer<Activtyall>() {
             @Override
             public void onChanged(Activtyall activtyall1) {
                 activtyall=activtyall1;
             }
         });
-        olderViewModel.getUserMess(MainActivity3.auth);
+        olderViewModel.getUserMess(MainActivityTTT.auth);
         olderViewModel.getUserMessLiveData.observe(getViewLifecycleOwner(), new Observer<Message>() {
             @Override
             public void onChanged(Message message) {
@@ -99,7 +99,7 @@ public class Fragment3 extends Fragment {
             else
             {
                 Glide.with(this)
-                        .load(MainActivity3.url) // 加载指定URL的图片
+                        .load(MainActivityTTT.url) // 加载指定URL的图片
                         .into(imageView1); // 将图片加载到指定的ImageView中
             }
         }
@@ -108,7 +108,7 @@ public class Fragment3 extends Fragment {
 
     //获取实例
     private void initView() {
-        imagePath = MainActivity3.url;
+        imagePath = MainActivityTTT.url;
         linearLayout1 = view.findViewById(R.id.car1);
         linearLayout2 = view.findViewById(R.id.car3);
         linearLayout3 = view.findViewById(R.id.car4);
@@ -122,7 +122,7 @@ public class Fragment3 extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), OlderDetail.class);
-                intent.putExtra("imagePath",MainActivity3.url);
+                intent.putExtra("imagePath", MainActivityTTT.url);
                 startActivityForResult(intent, REQUEST_CODE_OLDER_DETAIL_1 );
             }
         });
@@ -130,7 +130,7 @@ public class Fragment3 extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), Photodetail.class);
-                intent.putExtra("imagePath", MainActivity3.url);
+                intent.putExtra("imagePath", MainActivityTTT.url);
                 startActivityForResult(intent,REQUEST_CODE ); // 使用startActivityForResult()方法启动活动
             }
         });
@@ -166,8 +166,8 @@ public class Fragment3 extends Fragment {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             // 获取传递的信息
             imagePath = data.getStringExtra("imagePath2");
-            MainActivity3.imagePath = imagePath;
-            MainActivity3.flog=1;
+            MainActivityTTT.imagePath = imagePath;
+            MainActivityTTT.flog=1;
             Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
             imageView1.setImageBitmap(bitmap); // 加载本地图片
         }
@@ -175,8 +175,8 @@ public class Fragment3 extends Fragment {
             // 获取传递的信息
             imagePath = data.getStringExtra("imagePath2");
             Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-            MainActivity3.imagePath = imagePath;
-            MainActivity3.flog=1;
+            MainActivityTTT.imagePath = imagePath;
+            MainActivityTTT.flog=1;
             imageView1.setImageBitmap(bitmap); // 加载本地图片
         }
     }

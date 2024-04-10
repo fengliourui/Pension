@@ -1,8 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-
     <application
         android:theme="@style/Theme.Pension">
+        <activity
+            android:name=".register"
+            android:exported="false" />
+        <activity
+            android:name=".staff"
+            android:exported="false" />
+        <activity
+            android:name=".manager"
+            android:exported="false" />
+        <activity
+            android:name=".Util.login_staff"
+            android:exported="false" />
+        <activity
+            android:name=".Old_password"
+            android:exported="false" />
+        <activity
+            android:name=".relation_password"
+            android:exported="false" />
+        <activity
+            android:name=".Util.login_password"
+            android:exported="false" />
+        <activity
+            android:name=".Old_VerifyCode"
+            android:exported="false" />
+        <activity
+            android:name=".Util.login_verifycode"
+            android:exported="false"
+            android:label="@string/title_activity_login_verifycode"
+            android:theme="@style/Theme.OldCare" />
         <activity
             android:name=".MainActivitytht"
             android:exported="false">

@@ -101,8 +101,6 @@ public class Fragment3 extends Fragment {
             {
                 Glide.with(this)
                         .load(MainActivity1.url) // 加载指定URL的图片
-                        .placeholder(R.drawable.q) // 设置占位图，可选
-                        .error(R.drawable.error) // 加载失败时显示的图片，可选
                         .into(imageView1); // 将图片加载到指定的ImageView中
             }
         }

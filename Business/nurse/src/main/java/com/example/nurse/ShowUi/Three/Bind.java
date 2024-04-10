@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.Base.main.Service.Data.add.OlderBind;
 import com.example.Base.main.Service.ViewModel.OlderViewModel;
 import com.example.Business.dependents.R;
-import com.example.nurse.MainActivity3;
+import com.example.nurse.MainActivityTTT;
 
 import Ui.Show.Adapter.BindAdapter;
 
@@ -42,7 +42,7 @@ public class Bind extends AppCompatActivity {
         textView = findViewById(R.id.noMoreCommentsTextView1);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         recyclerView.setAdapter(adapter); // 设置适配器
-        olderViewModel.getOlerBind(MainActivity3.auth);
+        olderViewModel.getOlerBind(MainActivityTTT.auth);
         olderViewModel.GetOlderBindLiveData.observe(this, new Observer<OlderBind>() {
             @Override
             public void onChanged(OlderBind olderBind) {
@@ -68,7 +68,7 @@ public class Bind extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         // 判断请求码和结果码
         if (requestCode == REQUEST_CODE_OLDER_DETAIL_1 && resultCode == Activity.RESULT_OK) {
-            olderViewModel.getOlerBind(MainActivity3.auth);
+            olderViewModel.getOlerBind(MainActivityTTT.auth);
             olderViewModel.GetOlderBindLiveData.observe(this, new Observer<OlderBind>() {
                 @Override
                 public void onChanged(OlderBind olderBind) {

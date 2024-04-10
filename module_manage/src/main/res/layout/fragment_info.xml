@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/info_background"
+    tools:context=".fragment.Info">
+
+    <Button
+        android:id="@+id/addOld"
+        android:layout_width="113dp"
+        android:layout_height="113dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="72dp"
+        android:background="@drawable/old_avatar"
+        android:gravity="bottom|center"
+        android:scaleType="centerCrop"
+        android:text="添加老人"
+        android:textAlignment="gravity"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/addNurse"
+        android:layout_width="113dp"
+        android:layout_height="113dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="296dp"
+        android:background="@drawable/nurse_avatar"
+        android:gravity="bottom|center"
+        android:scaleType="centerCrop"
+        android:text="添加护士"
+        android:textAlignment="gravity"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/addActivity"
+        android:layout_width="113dp"
+        android:layout_height="113dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="524dp"
+        android:background="@drawable/add_activity"
+        android:gravity="bottom|center"
+        android:scaleType="centerCrop"
+        android:text="添加活动"
+        android:textAlignment="gravity"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

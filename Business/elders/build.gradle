@@ -1,4 +1,4 @@
-if(false)//这里是进行判断此时的状态
+if(isDebug)//这里是进行判断此时的状态
 {
     apply plugin :'com.android.application'
 }else
@@ -11,7 +11,7 @@ android {
     compileSdk 34
 
     defaultConfig {
-        if(false)//这里是进行判断此时的状态
+        if(isDebug)//这里是进行判断此时的状态
         {
             applicationId "com.example.Business.elders"
         }else
@@ -43,7 +43,7 @@ android {
     }
     sourceSets {//这个是为了处理AndroidManifest.xml'的问题，
         main{
-            if(false)
+            if(isDebug)
             {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             }else {
@@ -61,7 +61,6 @@ dependencies {
     implementation 'androidx.preference:preference:1.2.0'
     implementation project(path: ':Base:main')
     implementation 'com.google.android.libraries.mapsplatform.transportation:transportation-consumer:2.1.0'
-//    implementation project(path: ':module_login')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'

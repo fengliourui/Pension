@@ -42,7 +42,7 @@ android {
     }
     sourceSets {
         main {
-            if (isDebug.toBoolean()) {
+            if (isDebug) {
                 //独立调试
                 manifest.srcFile 'src/main/debug/AndroidManifest.xml'
             } else {
@@ -78,6 +78,10 @@ dependencies {
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
+
+    implementation project(path: ':module_manage')
+    implementation project(path: ':Business:nurse')
+
 
 
     //    ARouter的依赖

@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -18,7 +17,7 @@ import com.example.Base.main.Service.Data.nusion.Nurse;
 import com.example.Base.main.Service.HTP;
 import com.example.Base.main.Service.Repository;
 import com.example.Base.main.Service.ViewModel.OlderViewModel;
-import com.example.nurse.MainActivity3;
+import com.example.nurse.MainActivityTTT;
 import com.example.nurse.R;
 import com.example.nurse.ShowUi.Adapter.OlderHeathAdapter;
 import com.example.nurse.ShowUi.SharedViewModel;
@@ -82,8 +81,8 @@ public class DetailData extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d("ttttt", postS);
-                Log.d("ttttt", MainActivity3.auth);
-                olderViewModel.Postnurse(postS , MainActivity3.auth);
+                Log.d("ttttt", MainActivityTTT.auth);
+                olderViewModel.Postnurse(postS , MainActivityTTT.auth);
             }
         });
         olderViewModel.PostNurseLiveData.observe(DetailData.this, new Observer<Nurse>() {

@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.module_login.Util.CheckPhone;
 import com.example.module_login.databinding.ActivityOldPasswordBinding;
 
@@ -206,6 +207,7 @@ public class Old_password extends AppCompatActivity {
                                 JSONObject dataObject = jsonObject.getJSONObject("data");
                                 String token = dataObject.getString("token");
                                 String identify = dataObject.getString("identify");
+                                ARouter.getInstance().build("/elder/MainActivty1/1").withString("auth",token).navigation();
                                 Log.i(TAG, "identify"+ identify);
                                 Log.i(TAG, "message"+ message);
                                 Log.i(TAG, "token"+ token);

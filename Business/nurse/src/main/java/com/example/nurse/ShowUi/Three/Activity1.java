@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.Base.main.Service.Data.photo.Imageview;
 import com.example.Base.main.Service.ViewModel.OlderViewModel;
 import com.example.Business.elders.R;
-import com.example.nurse.MainActivity3;
+import com.example.nurse.MainActivityTTT;
 
 import UI.Adapter.ImageAdapter;
 
@@ -53,7 +53,7 @@ public class Activity1 extends AppCompatActivity {
     }
     private void getCloudData() {
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        olderViewModel.getGoodView(MainActivity3.auth);
+        olderViewModel.getGoodView(MainActivityTTT.auth);
         olderViewModel.goodviewLiveData.observe(this, new Observer<Imageview>() {
             @Override
             public void onChanged(Imageview imageview) {

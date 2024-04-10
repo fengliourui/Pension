@@ -16,7 +16,7 @@ import com.example.Base.main.Service.Data.add.nameAndIdentifyId;
 import com.example.Base.main.Service.Network;
 import com.example.Base.main.Service.ViewModel.OlderViewModel;
 import com.example.Business.dependents.R;
-import com.example.nurse.MainActivity3;
+import com.example.nurse.MainActivityTTT;
 
 
 public class SumBmit extends AppCompatActivity {
@@ -46,7 +46,7 @@ public class SumBmit extends AppCompatActivity {
                 post2.setText("");
                 OlderViewModel olderViewModel = new ViewModelProvider(SumBmit.this).get(OlderViewModel.class);
                 nameAndIdentifyId ss= new nameAndIdentifyId(s2,s1);
-                olderViewModel.PostOlerBind(ss, MainActivity3.auth);
+                olderViewModel.PostOlerBind(ss, MainActivityTTT.auth);
                 olderViewModel.PostOlderBindLiveData.observe(SumBmit.this, new Observer<Binddat>() {
                     @Override
                     public void onChanged(Binddat binddat) {

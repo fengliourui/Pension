@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.Base.main.Service.Data.add.OlderBind;
 import com.example.Base.main.Service.ViewModel.OlderViewModel;
-import com.example.nurse.MainActivity3;
+import com.example.nurse.MainActivityTTT;
 import com.example.nurse.R;
 import com.example.nurse.ShowUi.Adapter.BindAdapter;
 
@@ -43,7 +43,7 @@ public class Fragment2 extends Fragment {
         textView = view.findViewById(R.id.loading_text);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
         recyclerView.setAdapter(adapter); // 设置适配器
-        olderViewModel.getOlerBind(MainActivity3.auth);
+        olderViewModel.getOlerBind(MainActivityTTT.auth);
         olderViewModel.GetOlderBindLiveData.observe(getActivity(), new Observer<OlderBind>() {
             @Override
             public void onChanged(OlderBind olderBind) {

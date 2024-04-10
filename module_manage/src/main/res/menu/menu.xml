@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/item_firstpage"
+        android:icon="@drawable/firstpage"
+        android:title="首页"/>
+
+    <item
+        android:id="@+id/item_old"
+        android:icon="@drawable/old"
+        android:title="老人"/>
+
+    <item
+        android:id="@+id/item_nurse"
+        android:icon="@drawable/nurse"
+        android:title="护士"/>
+
+    <item
+        android:id="@+id/item_info"
+        android:icon="@drawable/info"
+        android:title="信息"/>
+</menu>

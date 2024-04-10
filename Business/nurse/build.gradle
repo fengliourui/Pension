@@ -1,4 +1,4 @@
-if(true)//这里是进行判断此时的状态
+if(isDebug)//这里是进行判断此时的状态
 {
     apply plugin :'com.android.application'
 }else
@@ -9,18 +9,18 @@ if(true)//这里是进行判断此时的状态
 
 android {
     namespace 'com.example.nurse'
-    compileSdk 33
+    compileSdk 32
 
     defaultConfig {
-        if(true)//这里是进行判断此时的状态
+        if(isDebug)//这里是进行判断此时的状态
         {
             applicationId "com.example.nurse"
         }else
         {
 
         }
-        minSdk 33
-        targetSdk 33
+        minSdk 32
+        targetSdk 32
         versionCode 1
         versionName "1.0"
 
@@ -45,7 +45,7 @@ android {
 
     sourceSets {//这个是为了处理AndroidManifest.xml'的问题，
         main{
-            if(true)
+            if(isDebug)
             {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             }else {
@@ -69,5 +69,9 @@ dependencies {
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.16.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    //    ARouter的依赖
+    implementation 'com.alibaba:arouter-api:1.5.2'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.5.2'
 
 }

@@ -18,7 +18,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.module_login.Util.CheckPhone;
+import com.example.module_login.Util.CountDownTimerUtils;
+import com.example.module_login.Util.Internet;
 import com.example.module_login.databinding.ActivityOldVerifyCodeBinding;
 
 import org.json.JSONException;
@@ -41,6 +44,8 @@ public class Old_VerifyCode extends AppCompatActivity {
     private ActivityOldVerifyCodeBinding binding;
 
     private final OkHttpClient client = new OkHttpClient();
+    String phoneNumber;
+    String getURL;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -164,6 +169,42 @@ public class Old_VerifyCode extends AppCompatActivity {
                 }
             }
         });
+        //发送验证码点击
+        binding.loginVerifycode.sendCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //发送验证码
+                phoneNumber = binding.loginVerifycode.phoneNumber.getText().toString();
+                if(phoneNumber.length() != 11){
+                    Toast.makeText(Old_VerifyCode.this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
+                }else{
+                    getURL = Internet.addURLParam("https://beadhouse.81jcpd.cn/user/code/send","phone",phoneNumber);
+                    getURL = Internet.addURLParam(getURL,"mode","1");
+                    Log.i(TAG, "请求的url是：" + getURL);
+                    Request request = new Request.Builder().get()
+                            .url(getURL)
+                            .build();
+                    Call call = client.newCall(request);
+                    call.enqueue(new Callback() {
+                        @Override
+                        public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                            Log.i(TAG, "onFailure: 网络请求失败");
+                        }
+
+                        @Override
+                        public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    CountDownTimerUtils mCountDown = new CountDownTimerUtils(binding.loginVerifycode.sendCode,60000,1000);
+                                    mCountDown.start();
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        });
         //登录
         binding.loginVerifycode.login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,6 +256,7 @@ public class Old_VerifyCode extends AppCompatActivity {
                                     JSONObject dataObject = jsonObject.getJSONObject("data");
                                     String token = dataObject.getString("token");
                                     String identify = dataObject.getString("identify");
+                                    ARouter.getInstance().build("/elder/MainActivty1/1").withString("auth",token).navigation();
                                     Log.i(TAG, "identify = "+ identify);
                                     Log.i(TAG, "token = "+ token);
                                 }

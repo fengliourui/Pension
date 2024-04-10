@@ -7,13 +7,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.Base.main.Service.Data.Health.AllData;
 import com.example.Base.main.Service.Data.Health.ShowData;
-import com.example.Base.main.Service.Network;
 import com.example.Base.main.Service.Repository;
 import com.example.Base.main.Service.ViewModel.OlderViewModel;
 import com.example.Business.dependents.MainActivity2;

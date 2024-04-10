@@ -12,7 +12,6 @@ import com.alibaba.android.arouter.launcher.ARouter;
 
 @Route(path ="/app/MainActivity")
 public class  MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

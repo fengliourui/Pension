@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/function" />
             <option value="$PROJECT_DIR$/function/main" />
             <option value="$PROJECT_DIR$/module_login" />
+            <option value="$PROJECT_DIR$/module_manage" />
           </set>
         </option>
       </GradleProjectSettings>

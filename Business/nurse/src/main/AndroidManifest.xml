@@ -27,7 +27,7 @@
             android:name=".ShowUi.Two.DetailData"
             android:exported="false" />
         <activity
-            android:name=".MainActivity3"
+            android:name=".MainActivityTTT"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

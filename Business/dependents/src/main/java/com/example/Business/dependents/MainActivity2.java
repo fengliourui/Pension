@@ -16,6 +16,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -26,7 +27,6 @@ import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.Base.main.Service.Data.older.Avatar;
 import com.example.Base.main.Service.ViewModel.OlderViewModel;
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -59,8 +59,9 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main1);
 //        auth = getIntent().getStringExtra("auth");
+//        Log.d("ttttt",auth);
         // 设置状态栏颜色为灰色
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -70,8 +71,8 @@ public class MainActivity2 extends AppCompatActivity {
             View decorView = window.getDecorView();
             decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
-        initOlderAvater();
         initView();
+        initOlderAvater();
     }
     private void initOlderAvater() {
         OlderViewModel olderViewModel = new ViewModelProvider(this).get(OlderViewModel.class);
@@ -128,7 +129,11 @@ public class MainActivity2 extends AppCompatActivity {
     }
     private void initView() {
         tabLayout = findViewById(R.id.tabLayout);
-        viewPager = findViewById(R.id.viewPager);
+        viewPager = findViewById(R.id.viewPager1);
+        if (viewPager==null)
+        {
+            Log.d("ttttt","1234567890");
+        }
         fragmentList = new ArrayList<>();
         if(imageFile != null && imageFile.exists() && flog == 0) {
             imagePath = imageFile.getAbsolutePath();

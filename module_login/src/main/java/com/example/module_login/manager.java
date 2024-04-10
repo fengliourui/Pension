@@ -18,6 +18,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.module_login.databinding.ActivityManagerBinding;
 
 import org.json.JSONException;
@@ -33,6 +35,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+@Route(path="/login/manager/1")
 public class manager extends AppCompatActivity {
 
     private static final String TAG = "manager";
@@ -176,6 +179,8 @@ public class manager extends AppCompatActivity {
                                 Log.i(TAG, "identify"+ identify);
                                 Log.i(TAG, "message"+ message);
                                 Log.i(TAG, "token"+ token);
+//                                ARouter.getInstance().build("/elder/MainActivty1/1").withString("auth",token).navigation();
+                                ARouter.getInstance().build("/manage/Main/1").withString("auth",token).navigation();
                             } catch (JSONException e) {
                                 throw new RuntimeException(e);
                             }
