@@ -1,11 +1,8 @@
 package com.example.nurse.ShowUi.Adapter;
 
-import static com.example.Base.main.Service.Repository.getActivity;
-
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.Base.main.Service.Data.Health.AllData;
 import com.example.nurse.R;
-import com.example.nurse.ShowUi.SharedViewModel;
 import com.example.nurse.ShowUi.Two.DetailData;
-
 import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +25,6 @@ public class OlderHeathAdapter extends RecyclerView.Adapter<OlderHeathAdapter.Ol
     private static boolean isIdAdded = false;
     public static void addHealthData(String key, String value, String id) {
         healthDataMap.put(key, value);
-
         // 只在首次添加数据时添加"id"
         if (!isIdAdded) {
             healthDataMap.put("id", id);
