@@ -295,6 +295,10 @@ public class Photodetail extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST);
+//            ActivityCompat.requestPermissions(ShowActivity.this,
+//                    new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+//                    STORAGE_PERMISSION);
+
         }
     }
     public File saveBitmapToCacheDir(Context context, Bitmap bitmap, String fileName) {

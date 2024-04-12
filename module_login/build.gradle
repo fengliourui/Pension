@@ -14,7 +14,7 @@ android {
             //独立调试的时候才能设置applicationId
             applicationId "com.example.module_login"
         }
-        minSdk 32
+        minSdk 29
         targetSdk 33
         versionCode 1
         versionName "1.0"
