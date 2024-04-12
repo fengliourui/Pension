@@ -1,18 +1,17 @@
 package com.example.Base.main.Service.ViewModel;
 
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
 import com.example.Base.main.Service.Data.Activity.ActivityOne;
+import com.example.Base.main.Service.Data.Activity.ActivityUsers;
+import com.example.Base.main.Service.Data.Activity.ActivtyUser;
 import com.example.Base.main.Service.Data.Activity.Activtyall;
 import com.example.Base.main.Service.Data.Activity.Postactivity;
-import com.example.Base.main.Service.Data.Activity.SignUpActivityVo;
-import com.example.Base.main.Service.Data.Health.AllData;
+import com.example.Base.main.Service.Data.Activity.signUpActivityVo;
 import com.example.Base.main.Service.Data.Health.ShowData;
 import com.example.Base.main.Service.Data.Parameter.BinOlder;
 import com.example.Base.main.Service.Data.Parameter.Comm;
@@ -88,7 +87,7 @@ public class OlderViewModel extends ViewModel {
     });
 
     public LiveData<Postactivity> postactivityLiveData= Transformations.switchMap(locationLiveData5, two -> {//由一个id得到一个信息的详细信息
-        SignUpActivityVo signUpActivityVo = new SignUpActivityVo(two.getData1());
+        signUpActivityVo signUpActivityVo = new signUpActivityVo(two.getData1());
         return  Repository.postActivity(signUpActivityVo,two.getData2());
     });
     public LiveData<Imageview>goodviewLiveData = Transformations.switchMap(locationLiveData6, auth -> {
@@ -121,7 +120,7 @@ public class OlderViewModel extends ViewModel {
         return  Repository.likeDeal(three.getData1(),three.getData2(),three.getData3());
     });
 
-    public LiveData<Activtyall> getUserACtivityLiveData = Transformations.switchMap(locationLiveData12, two -> {//获取所有活动展示
+    public LiveData<ActivityUsers> getUserACtivityLiveData = Transformations.switchMap(locationLiveData12, two -> {//获取所有活动展示
         return  Repository.getUSerActivity(two.getData1(),two.getData2());
     });
 

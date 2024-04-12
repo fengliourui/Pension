@@ -1,9 +1,9 @@
 package com.example.Base.main.Service.Data.Activity;
 
-public class SignUpActivityVo {
+public class signUpActivityVo {
     String activityId;
 
-    public SignUpActivityVo(String activityId) {
+    public signUpActivityVo(String activityId) {
         this.activityId = activityId;
     }
 

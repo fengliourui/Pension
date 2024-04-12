@@ -1,14 +1,14 @@
 package com.example.Base.main.Service;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.Base.main.Service.Data.Activity.ActivityOne;
+import com.example.Base.main.Service.Data.Activity.ActivityUsers;
+import com.example.Base.main.Service.Data.Activity.ActivtyUser;
 import com.example.Base.main.Service.Data.Activity.Activtyall;
 import com.example.Base.main.Service.Data.Activity.Postactivity;
-import com.example.Base.main.Service.Data.Activity.SignUpActivityVo;
+import com.example.Base.main.Service.Data.Activity.signUpActivityVo;
 import com.example.Base.main.Service.Data.Health.AllData;
 import com.example.Base.main.Service.Data.Health.ShowData;
 import com.example.Base.main.Service.Data.add.Binddat;
@@ -114,11 +114,12 @@ public class Repository {
         return liveData;
     }
 
-    public static LiveData<Activtyall> getUSerActivity(String auth,String status) {
-        MutableLiveData<Activtyall> liveData = new MutableLiveData<>();
+    public static LiveData<ActivityUsers> getUSerActivity(String auth, String status) {
+        MutableLiveData<ActivityUsers> liveData = new MutableLiveData<>();
         new Thread(() -> {
-            Activtyall activtyall= Network.getUserActivity(auth,status);
-            liveData.postValue(activtyall);
+            List<ActivtyUser> activtyall= Network.getUserActivity(auth,status);
+            ActivityUsers activities = new ActivityUsers(activtyall);
+            liveData.postValue(activities);
         }).start();
         return liveData;
     }
@@ -131,7 +132,7 @@ public class Repository {
         return liveData;
     }
 
-    public static LiveData<Postactivity> postActivity(SignUpActivityVo signUpActivityVo, String auth) {
+    public static LiveData<Postactivity> postActivity(signUpActivityVo signUpActivityVo, String auth) {
         MutableLiveData<Postactivity> liveData = new MutableLiveData<>();
         new Thread(() -> {
             Postactivity postavaterphoto= Network.postAcivity(signUpActivityVo,auth);

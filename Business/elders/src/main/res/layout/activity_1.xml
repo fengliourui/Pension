@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="我的收藏"
+                android:text="我参加的活动"
                 android:textColor="@color/black"
                 android:textSize="19dp" />
         </LinearLayout>

@@ -2,13 +2,8 @@ package com.example.Base.main.Service.Chat;
 
 import com.example.Base.main.Service.Chat.Data.Answer;
 
-import com.example.Base.main.Service.Chat.Data.message;
-import com.example.Base.main.Service.Data.Activity.Postactivity;
-import com.example.Base.main.Service.Data.Activity.SignUpActivityVo;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

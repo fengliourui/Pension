@@ -3,9 +3,11 @@ package com.example.Base.main.Service;
 import android.util.Log;
 
 import com.example.Base.main.Service.Data.Activity.ActivityOne;
+import com.example.Base.main.Service.Data.Activity.ActivityUsers;
+import com.example.Base.main.Service.Data.Activity.ActivtyUser;
 import com.example.Base.main.Service.Data.Activity.Activtyall;
 import com.example.Base.main.Service.Data.Activity.Postactivity;
-import com.example.Base.main.Service.Data.Activity.SignUpActivityVo;
+import com.example.Base.main.Service.Data.Activity.signUpActivityVo;
 import com.example.Base.main.Service.Data.Health.AllData;
 import com.example.Base.main.Service.Data.Health.ShowData;
 import com.example.Base.main.Service.Data.add.Binddat;
@@ -30,6 +32,7 @@ import com.example.Base.main.Service.Data.photo.Text;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -136,9 +139,9 @@ public class Network {
      * @param status 审核状态 0不通过  1审核中 2审核通过
      * @return
      */
-    public static Activtyall getUserActivity(String auth,String status) {
+    public static List<ActivtyUser> getUserActivity(String auth, String status) {
         try {
-            Response<Activtyall> response = Service.getUserActivity(auth,status).execute();
+            Response<List<ActivtyUser>> response = Service.getUserActivity(auth,status).execute();
             if (response.isSuccessful()) {
                 return response.body();
             } else {
@@ -165,13 +168,14 @@ public class Network {
     }
 
 
-    public static Postactivity postAcivity(SignUpActivityVo postactivity, String auth) {
+    public static Postactivity postAcivity(signUpActivityVo postactivity, String auth) {
         try {
             Response<Postactivity> response = Service.postActivity(postactivity,auth).execute();
             if (response.isSuccessful()) {
-
+                Log.d("tttt","Unexpected HTTP code: " + response.code());
                 return response.body();
             } else {
+                Log.d("tttt","Unexpected HTTP code: " + response.code());
                 throw new IOException("Unexpected HTTP code: " + response.code());
             }
         } catch (IOException e) {

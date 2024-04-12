@@ -17,7 +17,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
-import com.example.Base.main.Service.Data.Activity.Activtyall;
+import com.example.Base.main.Service.Data.Activity.ActivtyUser;
 import com.example.Base.main.Service.Data.older.Message;
 import com.example.Base.main.Service.Data.older.Older;
 import com.example.Base.main.Service.ViewModel.OlderViewModel;
@@ -43,7 +43,7 @@ public class Fragment3 extends Fragment {
 
     String imagePath;
 
-    Activtyall activtyall;
+    ActivtyUser activtyall;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,13 +70,6 @@ public class Fragment3 extends Fragment {
             public void onChanged(Older older) {
                 //初始化视图
                 initialize(older);
-            }
-        });
-        olderViewModel.getUserActivity(MainActivity2.auth,"3");
-        olderViewModel.getUserACtivityLiveData.observe(getViewLifecycleOwner(), new Observer<Activtyall>() {
-            @Override
-            public void onChanged(Activtyall activtyall1) {
-                activtyall=activtyall1;
             }
         });
         olderViewModel.getUserMess(MainActivity2.auth);
