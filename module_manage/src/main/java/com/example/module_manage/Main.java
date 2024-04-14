@@ -25,6 +25,7 @@ import java.util.List;
 public class Main extends AppCompatActivity {
 
     private BottomNavigationView navigationView;
+    private static final String TAG = "Main";
     private ViewPager viewPager;
     public static String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyRHRvIjp7InVzZXJJZCI6ImNiZDVjNjRlLTRlNGYtNDkxZC1iYjk0LTQxMjI2Y2Y4NjhhYyIsImlkZW50aWZ5IjoiMCIsInVzZXJOYW1lIjoiIn0sImV4cCI6MzI4OTI4NDk1Mn0.U0tSSZmNHFZUFXQIMwFzQ0-CiwZQcQ1ZbG_IQbIuBjY";
     @Override
@@ -32,6 +33,7 @@ public class Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_main);
         token = getIntent().getStringExtra("auth");
+        Log.i(TAG, token);
         //设置状态栏颜色
         getWindow().setStatusBarColor(getResources().getColor(android.R.color.transparent));
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);

@@ -15,6 +15,7 @@ import android.provider.MediaStore;
  * 获取到的虚拟路径可以展示到ImageView中，但是我们的目的是要将图片上传，即要上传一个file
  * 但是通过虚拟路径是不能创建file的，所以我们需要将虚拟路径转化成真实路径
  * 在这里进行路劲转化时需要用到存储权限，所以我们在选择图片时加上了动态获取权限的代码
+ * 这个类没什么用
  */
 public class Path {
     public static String getRealPath(Context context, Intent data){

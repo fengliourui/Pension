@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.module_manage.Main;
 import com.example.module_manage.R;
 import com.example.module_manage.databinding.ActivityAddNurseBinding;
+import com.example.module_manage.util.Internet;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,6 +32,7 @@ public class addNurse extends AppCompatActivity {
 
     private static final String TAG = "addNurse";
     ActivityAddNurseBinding binding;
+    String getURL;
     Button register;
     String account;
     String idNumber;
@@ -81,22 +83,13 @@ public class addNurse extends AppCompatActivity {
                     formBuilder.add("auth",token);
                     RequestBody formBody = formBuilder.build();*/
 
-                    //字符串数据
-                    RequestBody stringBody = RequestBody.create(MediaType.parse("text/plain"),token);
-
-                    //创建MultipartBody，用于同时包含JSON和普通字符串
-                    MultipartBody.Builder multipartBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-                    //添加json部分作为part
-                    multipartBuilder.addFormDataPart("registerVO","json_data.json",jsonBody);//第二个参数为文件名，虽然没有文件但还是要写 不知道为什么
-                    //添加string部分作为part
-                    multipartBuilder.addFormDataPart("auth","string_data.txt",stringBody);
-                    //创建完整的multipartBody
-                    RequestBody requestBody = multipartBuilder.build();
+                    getURL = Internet.addURLParam("https://beadhouse.81jcpd.cn/master/register/nursing","auth",token);
                     Request request = new Request.Builder()
-                            .url("https://beadhouse.81jcpd.cn/master/register/nursing")
-                            .post(requestBody)
+                            .url(getURL)
+                            .post(jsonBody)
                             .build();
                     Log.i(TAG, json);
+                    Log.i(TAG, getURL);
                     Call call = client.newCall(request);
                     call.enqueue(new Callback() {
                         @Override
@@ -108,12 +101,14 @@ public class addNurse extends AppCompatActivity {
                         public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                             Log.i(TAG, "onResponse: 网络请求成功");
                             String res = response.body().string();
+                            Log.i(TAG, res);
                             try {
                                 JSONObject jsonObject = new JSONObject(res);
                                 String message = jsonObject.getString("message");
                                 Log.i(TAG, "返回的message：" + message);
                                 String code = jsonObject.getString("code");
                                 Log.i(TAG, "返回的code：" + code);
+                                Log.i(TAG, response.code() + "");
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {

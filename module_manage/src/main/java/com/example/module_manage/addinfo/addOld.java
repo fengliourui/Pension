@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.module_manage.Main;
 import com.example.module_manage.R;
 import com.example.module_manage.databinding.ActivityAddOldBinding;
+import com.example.module_manage.util.Internet;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,6 +36,7 @@ public class addOld extends AppCompatActivity {
     String idNumber;
     String password;
     String name;
+    String getURL;
 
     ActivityAddOldBinding binding;
     private final OkHttpClient client = new OkHttpClient();
@@ -83,20 +85,10 @@ public class addOld extends AppCompatActivity {
                     formBuilder.add("auth",token);
                     RequestBody formBody = formBuilder.build();*/
 
-                    //字符串数据
-                    RequestBody stringBody = RequestBody.create(MediaType.parse("text/plain"),token);
-
-                    //创建MultipartBody，用于同时包含JSON和普通字符串
-                    MultipartBody.Builder multipartBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-                    //添加json部分作为part
-                    multipartBuilder.addFormDataPart("registerVO","json_data.json",jsonBody);//第二个参数为文件名，虽然没有文件但还是要写 不知道为什么
-                    //添加string部分作为part
-                    multipartBuilder.addFormDataPart("auth","string_data.txt",stringBody);
-                    //创建完整的multipartBody
-                    RequestBody requestBody = multipartBuilder.build();
+                    getURL = Internet.addURLParam("https://beadhouse.81jcpd.cn/master/register/older","auth",token);
                     Request request = new Request.Builder()
-                            .url("https://beadhouse.81jcpd.cn/master/register/older")
-                            .post(requestBody)
+                            .url(getURL)
+                            .post(jsonBody)
                             .build();
                     Log.i(TAG, json);
                     Call call = client.newCall(request);
